@@ -144,7 +144,9 @@ const gerarCod=()=>Array.from(crypto.getRandomValues(new Uint32Array(6)),x=>ALF[
 const rid=n=>{const a='ABCDEFGHJKMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789';return Array.from(crypto.getRandomValues(new Uint32Array(n)),x=>a[x%a.length]).join('');};
 const fmt=ms=>ms?new Date(ms).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'–';
 const pct=(a,b)=>b?Math.round(a/b*100):0;
-const ecode=e=>String(e&&(e.code||e.message)||'erro').replace(/^(auth|firestore)\//,'');
+const ecodeRaw=e=>String(e&&(e.code||e.message)||'erro').replace(/^(auth|firestore)\//,'');
+const EMSG={'missing-password':'Adicione uma senha','missing-email':'Informe o e-mail','invalid-email':'E-mail inválido','weak-password':'A senha precisa ter pelo menos 6 caracteres','email-already-in-use':'Este e-mail já tem conta. Use Entrar ou Esqueci a senha','invalid-credential':'E-mail ou senha incorretos','wrong-password':'E-mail ou senha incorretos','user-not-found':'E-mail ou senha incorretos','invalid-login-credentials':'E-mail ou senha incorretos','user-disabled':'Esta conta foi desativada','too-many-requests':'Muitas tentativas. Aguarde alguns minutos e tente de novo','network-request-failed':'Sem conexão com a internet','permission-denied':'Sem permissão para esta ação','unavailable':'Serviço indisponível no momento. Tente de novo','requires-recent-login':'Entre novamente para continuar','expired-action-code':'O link expirou. Peça um novo','invalid-action-code':'O link é inválido ou já foi usado'};
+const ecode=e=>{const c=ecodeRaw(e);return EMSG[c]||c;};
 function baixar(nome,txt,tipo){const b=new Blob([txt],{type:tipo});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download=nome;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);}
 const csvCel=v=>{v=String(v??'');return /[;"\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
 const csv=(rows)=>'﻿'+rows.map(r=>r.map(csvCel).join(';')).join('\r\n');

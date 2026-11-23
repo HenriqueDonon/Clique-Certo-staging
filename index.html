@@ -82,7 +82,8 @@ mark{background:none;color:inherit}
 #stat{position:absolute;left:0;right:0;bottom:0;z-index:2;pointer-events:none;padding:12px 16px;background:#10252f;color:#fff;font-size:.95rem;overflow-wrap:anywhere}
 #stat code{font-family:var(--m)}#stat b{color:#ffd966}
 #stat[hidden]{display:none}
-#pop{position:absolute;inset:0;background:#0007;display:grid;place-items:center;padding:16px;z-index:5}
+#pop{position:absolute;inset:0;background:#0007;display:flex;flex-direction:column;align-items:center;padding:16px;z-index:5;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#pop>.popw{margin:auto 0;flex:none}
 .popw{background:#fff;border:4px solid var(--bad);border-radius:8px;max-width:520px;width:100%;box-shadow:0 20px 60px #000a;overflow:hidden}
 .popw header{background:var(--bad);color:#fff;font-weight:700;padding:8px 14px}
 .popw .in{padding:18px 20px}.quote{border-left:3px solid #cbd5e1;margin:14px 0 0;padding:6px 12px;color:#5b6b7a}.docc,.ics{display:flex;gap:12px;align-items:center;border:1px solid #d6e0ec;border-radius:10px;padding:10px 12px;margin:10px 0;background:#f8fafc}.ics{border-left:4px solid #0f6cbd;background:#f4f8fd}.ics .d{text-align:center;min-width:44px;line-height:1.1}.ics .d span{display:block;font-size:1.5rem;font-weight:800}.ianote{border-left:4px solid #7c3aed;background:#f5f0ff;border-radius:8px;padding:10px 12px;margin:10px 0;max-width:62ch}.vis{margin:0 0 12px;text-align:center}.vis svg{width:100%;max-width:440px;height:auto}.vcap{font-size:.82rem;color:var(--mute);margin:4px 0 0}
@@ -254,13 +255,159 @@ mark{background:none;color:inherit}
 #netErr{position:fixed;left:50%;top:10px;transform:translateX(-50%);z-index:95;max-width:min(560px,calc(100% - 24px));background:#fde8e6;color:#7a1712;border:1px solid #f3b4ae;border-radius:10px;padding:10px 14px;font-weight:700;font-size:.92rem;box-shadow:0 6px 24px #0004}#netErr[hidden]{display:none}
 @media(max-width:640px){#rep .rpage{padding:22px 16px}#rep .kv{font-size:1.6rem;white-space:nowrap}#rep .rmeta,#rep .rk,#rep .kp{grid-template-columns:repeat(2,1fr)}#rep .rhd{display:block}}
 .priv{max-height:none}.priv h2{margin-top:0}.priv h3{font-size:1rem;margin:14px 0 4px}.priv ul{margin:0;padding-left:20px}
+/* =====================================================================
+   TEMA v2 (B6 aprovado): produto real, sóbrio. Sobrepõe o tema antigo.
+   Texto #1c2430 · títulos #13233a · secundário #5c6775 · fundo #f4f5f7
+   superfícies #fff · divisores #dde1e7 · destaque #1f4e8c
+   acerto #15803d · erro/golpe #b42318 · bordas 1px · cantos 4–6px
+   ===================================================================== */
+:root{--bg:#f4f5f7;--ink:#1c2430;--h:#13233a;--mute:#5c6775;--line:#dde1e7;--line2:#b9c1cc;--paper:#fff;--soft:#f4f6f9;--accent:#1f4e8c;--ok:#15803d;--okbg:#f0f7f2;--bad:#b42318;--badbg:#fdf3f2;--warn:#fff1b8}
+body{background:var(--bg);color:var(--ink)}
+#app{background:var(--bg)}
+#app::before,.splash::before,#desk::before{display:none!important}
+.screen{background:var(--bg);padding:0}
+.screen>.card,.screen>.pg{margin:0 auto}
+.card{--pad:24px;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:none;max-width:680px;margin:24px auto!important;align-self:flex-start}
+.card h1{font:700 1.6rem/1.2 var(--f);color:var(--h);margin:0 0 10px}
+.card h2{font:700 1.1rem/1.3 var(--f);color:var(--h);margin:20px 0 8px}
+.card .lead{font-size:1.05rem}
+.eyebrow{font-size:.9rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--mute);margin:0 0 4px}
+.mini{color:var(--mute)}
+.big{font:700 2.2rem/1.2 var(--f);color:var(--h);background:none;-webkit-background-clip:initial;background-clip:initial}
+/* botões */
+.b{border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:4px;padding:12px 18px;min-height:48px;font-weight:700;box-shadow:none;transition:background .15s}
+.b:hover{filter:none;background:#183f72}
+.b:active{transform:none;box-shadow:none}
+.b:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--h);outline-offset:2px}
+.b.go,.b.neu{background:#fff;color:var(--ink);border-color:var(--line2);box-shadow:none}
+.b.go:hover,.b.neu:hover{background:var(--soft)}
+.b.stop{background:var(--bad);border-color:var(--bad);color:#fff;box-shadow:none}
+.b.stop:hover{background:#8f1c13}
+.b.ghost{background:none;border-color:transparent;color:var(--accent)}
+.b:disabled{opacity:1;background:#8796aa;border-color:#8796aa;color:#fff;filter:none}
+#go2{animation:none}
+.acts{display:grid;gap:8px;margin-top:16px}
+#mGo,#avOk{width:100%;margin-top:12px}
+/* páginas com cabeçalho (acesso, aviso) */
+.pg{width:100%;min-height:100%;display:flex;flex-direction:column}
+.pg>.card{margin:24px auto!important;width:calc(100% - 32px)}
+#acesso{padding:0;background:var(--bg);color:var(--ink)}
+.ac2{min-height:100%;display:flex;flex-direction:column;width:100%}
+.ac2-top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);background:#fff;width:100%}
+.ac2-marca{font-weight:700;font-size:1rem;color:var(--ink)}
+.ac2-op{font-size:.85rem;color:var(--mute)}
+.ac2-main{flex:1;display:grid;grid-template-areas:"info" "form" "como";gap:20px;padding:20px 20px 12px;max-width:980px;width:100%;margin:0 auto;align-content:start}
+.ac2-info{grid-area:info}.ac2-form{grid-area:form}.ac2-como{grid-area:como}
+.ac2-kicker{margin:0 0 6px;font-size:.85rem;color:var(--mute)}
+.ac2-emp{margin:0 0 10px;font:700 1.6rem/1.2 var(--f);color:var(--h)}
+.ac2-lead{margin:0;font-size:1rem;line-height:1.5;color:#2c3746}
+.ac2-passos{list-style:none;margin:0 0 12px;padding:0;border-top:1px solid var(--line);counter-reset:p}
+.ac2-passos li{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;padding:10px 0;border-bottom:1px solid var(--line);counter-increment:p;font-size:.95rem}
+.ac2-passos li::before{content:counter(p) ".";grid-row:span 2;min-width:18px;font-weight:700;color:var(--h)}
+.ac2-passos b{color:var(--h)}.ac2-passos span{color:var(--mute)}
+.ac2-tempo{margin:0;font-size:.9rem;color:var(--mute)}
+.ac2-form{background:#fff;border:1px solid var(--line);border-radius:6px;padding:20px}
+.ac2-form h2{margin:0 0 14px;font-size:1.15rem;color:var(--h)}
+#acForm{display:grid;gap:6px}
+#acForm label{font-size:.9rem;font-weight:700;color:#2c3746;margin-top:6px}
+#acForm input{font:inherit;font-size:1rem;padding:12px;border:1px solid var(--line2);border-radius:4px;background:#fff;color:var(--ink);min-height:48px;width:100%}
+#acForm input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+#acForm input::placeholder{color:#8792a0}
+.ac2-ajuda{margin:2px 0 0;font-size:.85rem;color:var(--mute)}
+.ac2-erro{margin:4px 0 0;padding:8px 10px;border-left:3px solid var(--bad);background:var(--badbg);color:#8a1c12;font-size:.9rem}
+.ac2-btn{margin-top:12px;min-height:48px;border:0;border-radius:4px;background:var(--accent);color:#fff;font:700 1rem var(--f);cursor:pointer}
+.ac2-btn:hover{background:#183f72}.ac2-btn:disabled{background:#8796aa}
+.ac2-nota{margin:10px 0 0;font-size:.85rem;color:var(--mute)}
+.ac2-rod{padding:16px 20px;font-size:.85rem;color:var(--mute);border-top:1px solid var(--line);text-align:center;background:#fff}
+.ac2-link{background:none;border:0;padding:0;font:inherit;color:var(--accent);text-decoration:underline;cursor:pointer}
+#acMsg{color:var(--ink);font-size:1rem}
+@media(min-width:860px){.ac2-main{grid-template-columns:1.2fr 1fr;grid-template-areas:"info form" "como form";gap:20px 56px;padding:56px 32px}.ac2-emp{font-size:2.1rem}.ac2-form{padding:28px;align-self:start}}
+/* aviso de privacidade */
+.priv h2{font-size:1.3rem}.priv h3{color:var(--h)}
+/* mesa (PC simulado, visual neutro) */
+#desk{background:#e7eaee}
+.ico{color:var(--ink)}
+.ico:hover{background:#0000000d}
+.ico>svg,.ico:hover>svg{filter:none;transform:none}
+.ico span.t{background:none;color:var(--ink);font-weight:700;padding:0}
+.badge{background:var(--bad)}.badge.pulse{animation:none}
+.win{border-radius:6px;box-shadow:0 1px 2px #0000001a;border:1px solid var(--line2)}
+.win.app-mail,.win.app-chat{--ac:var(--accent);--tint:#eef2f7}
+.tbar{background:#fff;color:var(--h);border-bottom:1px solid var(--line);font-weight:700}
+.tbar button{color:var(--h)}.tbar button:hover{background:var(--soft)}
+.tbar .ic{background:none;color:var(--h)}
+.app-chat .list{background:#fff}.app-chat .detail{background:#fff}
+.row.sel{background:#eef2f7;box-shadow:inset 3px 0 0 var(--accent)}
+.row.new::after{background:var(--accent)}
+.app-mail .detail h2{font:700 1.25rem/1.3 var(--f);color:var(--h)}
+.bubble{border:1px solid var(--line);border-radius:6px;box-shadow:none;background:#fff}
+.pill.on{background:#eef2f7;color:var(--mute)}.pill.ext{background:#fff;color:#8a5a00;border:1px solid #d9b45c}
+.att{background:#fff;border:1px solid var(--line2);border-radius:4px}
+.lnk{color:var(--accent)}
+.decide{animation:none}
+#bar{background:#fff;border-top:1px solid var(--line);color:var(--ink);-webkit-backdrop-filter:none;backdrop-filter:none}
+#bar .brand{letter-spacing:0;font-weight:700;color:var(--h)}
+#tasks button{background:#eef2f7;color:var(--ink);border-bottom:2px solid var(--accent);border-radius:4px}
+.phl{background:#eef2f7;color:var(--h)}
+.hud b{color:var(--h)}.hud span{color:var(--mute)}
+#st{background:#eef2f7;color:var(--h)}
+.meter i{background:var(--line)}
+#mute{background:#eef2f7;color:var(--ink);border-radius:4px}
+#stat{background:var(--h)}
+#toast{background:#fff;border:1px solid var(--line2);border-radius:6px;box-shadow:0 1px 2px #0000001a;animation:none}
+#toast .ic,#toast.mail .ic,#toast.chat .ic{background:var(--accent)}
+/* pop-up do sistema */
+#pop{background:#13233a66}
+.popw{border:1px solid var(--line2);border-radius:6px;box-shadow:none}
+.popw header{background:#eef2f7;border-bottom:1px solid var(--line)}
+.popw header .ic{background:none;color:var(--bad)}
+/* resultado */
+.res{animation:none;border:0;border-left:4px solid;border-radius:0 4px 4px 0;padding:14px 16px}
+.res.okk{border:0;border-left:4px solid var(--ok);background:var(--okbg)}
+.res.no{border:0;border-left:4px solid var(--bad);background:var(--badbg)}
+.rh .ic{display:none}
+.res.okk h3{color:var(--ok)}.res.no h3{color:var(--bad)}
+.pts{color:var(--mute);font-size:.95rem}
+.ianote{border:0;background:none;border-radius:0;padding:0;margin:8px 0}
+.done mark.clue,.clue-on,.done .att.clue{background:var(--warn);box-shadow:0 0 0 2px var(--warn)}
+/* aula */
+.aula .card{max-width:720px}
+.hero,.hero.cv{background:#fff;border-bottom:1px solid var(--line);border-radius:0}
+.hero::before{display:none}
+.hero .lt,.hero.sm .lt{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--h);filter:none;font-family:var(--f);font-weight:700;letter-spacing:0}
+.hero .tg{color:var(--mute);letter-spacing:0;text-transform:none;font-weight:400;font-size:.95rem}
+.hero .lu{display:none}
+.cvn{color:var(--h);font-family:var(--f)}.cvs{color:var(--mute)}
+.dots i{border-radius:0;height:4px;background:var(--line)}.dots i.on{background:var(--accent)}.dots i.dn{background:#9fb3cc}
+.sl{animation:none}
+.sl h2{font:700 1.4rem/1.25 var(--f);color:var(--h)}
+.gl{color:var(--accent);border-bottom-color:var(--accent)}
+.gbox{background:var(--soft);border-left:3px solid var(--accent);border-radius:0}
+.chips div{background:#fff;border:1px solid var(--line);border-radius:6px}
+.chips.x div{background:#fff;border-color:#efc6c1}
+.ic{background:#eef2f7;color:var(--h);border-radius:4px}
+.chips.x .ic{background:var(--badbg);color:var(--bad)}
+.mail{border-radius:6px}.mail .bt{background:var(--accent);border-radius:4px}
+.fk{background:var(--badbg);color:var(--bad)}.rl{background:var(--okbg);color:var(--ok)}
+/* intermediárias e final */
+.evo{justify-content:flex-start;gap:12px}.evo div{background:#fff;border:1px solid var(--line);border-radius:6px;text-align:left}
+.evo b{font:700 1.3rem var(--f);color:var(--h)}
+.evt{text-align:left}
+.rules{background:none;border:0;padding:0 0 0 20px}
+.rules li{margin:6px 0}
+.miss{padding-left:20px}
+#end{background:var(--bg);overflow:auto;z-index:4}
+#netErr{border-radius:4px;box-shadow:none}
+@media(max-width:720px){#tasks{display:none}#bar{gap:8px;padding:0 10px}.meter i{width:48px}#mute{padding:6px 8px}
+.card{margin:0 auto!important;border-radius:0;border-left:0;border-right:0;min-height:100%}.pg>.card{width:100%;margin:0!important}}
 </style>
 <div id="app">
  <div class="screen" id="cert" hidden>
-  <div class="card" style="text-align:center;max-width:720px">
-   <p class="eyebrow">Seu certificado</p>
-   <img id="certImg" alt="Certificado de conclusão" style="width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block">
-   <p class="mini">Toque e segure a imagem para salvar no celular.</p>
+  <div class="card" style="max-width:760px">
+   <h1>Seu certificado</h1>
+   <img id="certImg" alt="Certificado de conclusão" style="width:100%;height:auto;border:1px solid var(--line);display:block">
+   <p class="mini" id="certCod"></p>
+   <p class="mini">No celular, toque e segure a imagem para salvar.</p>
    <div style="display:grid;gap:8px"><a class="b" id="certDl" download="certificado-clique-certo.png" style="text-decoration:none;text-align:center;display:block">Baixar imagem</a><button class="b ghost" id="certBack">Voltar</button></div>
   </div>
  </div>
@@ -268,31 +415,51 @@ mark{background:none;color:inherit}
   <div><p class="eyebrow" style="color:#9fd4e6">Treinamento de segurança digital</p><div class="spn" id="spName"></div><p class="mini" style="color:#9fd4e6">Toque para continuar</p></div>
  </div>
  <div class="screen" id="aviso" hidden>
-  <div class="card priv"><div id="avTxt"></div><button class="b" id="avOk" style="width:100%;margin-top:8px">Li e quero continuar</button></div>
+  <div class="pg"><header class="ac2-top"><span class="ac2-marca">Clique Certo</span><span class="ac2-op">Ativa Security</span></header>
+  <div class="card priv"><div id="avTxt"></div><button class="b" id="avOk">Li e quero continuar</button></div></div>
  </div>
  <div class="screen" id="acesso" hidden>
-  <div class="card">
-   <div class="hero"><h1 class="lt"><span class="c">Clique</span> Certo</h1><p class="tg">Treinamento de segurança digital</p></div>
-   <p>Boas-vindas ao treinamento de conscientização em segurança digital de <b id="acEmp"></b>.</p>
-   <p class="mini" id="acMsg" hidden></p>
-   <div id="acForm" class="cfg" hidden>
-    <label for="inEm">Seu e-mail corporativo</label>
-    <input id="inEm" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="120" placeholder="nome@empresa.com.br">
-    <label for="inCod" id="lbCod">Código de acesso</label>
-    <input id="inCod" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30">
-    <p class="mini" id="acErr" role="alert" hidden style="color:var(--bad);margin:0"></p>
-    <button class="b" id="acGo" style="width:100%">Entrar</button>
-    <p class="mini" style="margin:0">Você pode continuar de qualquer aparelho com o mesmo e-mail. Seu progresso fica salvo.</p>
-   </div>
+  <div class="ac2">
+   <header class="ac2-top"><span class="ac2-marca">Clique Certo</span><span class="ac2-op">Ativa Security</span></header>
+   <main class="ac2-main">
+    <section class="ac2-info">
+     <p class="ac2-kicker" id="acNivel">Treinamento de segurança digital</p>
+     <h1 class="ac2-emp" id="acEmp"></h1>
+     <p class="ac2-lead">Você vai analisar mensagens parecidas com as do seu dia a dia e decidir quais são golpes.</p>
+    </section>
+    <section class="ac2-form" aria-labelledby="acTit">
+     <h2 id="acTit">Entrar</h2>
+     <p class="mini" id="acMsg" hidden></p>
+     <div id="acForm" hidden>
+      <label for="inEm">E-mail corporativo</label>
+      <input id="inEm" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="120" placeholder="nome.sobrenome@empresa.com.br">
+      <label for="inCod" id="lbCod">Código de acesso</label>
+      <input id="inCod" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30">
+      <p class="ac2-ajuda" id="acHelp"></p>
+      <p class="ac2-erro" id="acErr" role="alert" hidden></p>
+      <button class="ac2-btn" id="acGo">Entrar</button>
+      <p class="ac2-nota" id="acNota"></p>
+     </div>
+    </section>
+    <section class="ac2-como" aria-label="Como funciona">
+     <ol class="ac2-passos">
+      <li><b>Pré-teste</b><span>14 mensagens, para medir o ponto de partida.</span></li>
+      <li><b>Aula rápida</b><span>cerca de 3 minutos.</span></li>
+      <li><b>Pós-teste</b><span>14 mensagens novas.</span></li>
+     </ol>
+     <p class="ac2-tempo">Tempo total: cerca de 20 minutos. Dá para parar e continuar depois.</p>
+    </section>
+   </main>
+   <footer class="ac2-rod">Operado pela Ativa Security · <button type="button" class="ac2-link" id="acPriv">Como usamos seus dados</button></footer>
   </div>
  </div>
  <div class="screen" id="meio" hidden>
-  <div class="card" style="text-align:center">
-   <p class="eyebrow">Pré-teste concluído</p>
-   <div class="big" id="mScore"></div>
-   <p>mensagens avaliadas corretamente.</p>
-   <p>Agora veja a <b>aula rápida</b> (cerca de 3 minutos). Depois vem o <b>pós-teste</b>, com mensagens novas.</p>
-   <button class="b" id="mGo" style="width:100%">Ir para a aula</button>
+  <div class="card">
+   <p class="eyebrow">Etapa 1 de 3 concluída</p>
+   <h1>Pré-teste concluído</h1>
+   <p class="lead">Você avaliou corretamente <b id="mScore"></b> mensagens.</p>
+   <p>Próximo passo: a <b>aula rápida</b>, de cerca de 3 minutos. Depois vem o <b>pós-teste</b>, com 14 mensagens novas.</p>
+   <button class="b" id="mGo">Ir para a aula</button>
   </div>
  </div>
  <div class="screen aula" id="aula" hidden>
@@ -310,7 +477,7 @@ mark{background:none;color:inherit}
   <div id="fx"></div>
   <button id="toast" hidden></button>
   <div id="bar">
-   <span class="brand"><svg viewBox="0 0 24 28" width="18" height="21" aria-hidden="true"><path d="M12 1l9 3.5V13c0 6-4 10-9 13-5-3-9-7-9-13V4.5z" fill="#35c8ff"/><path d="M7.5 13.5l3.2 3.2 6-6.8" fill="none" stroke="#06172a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="brand">ATIVA SECURITY PC</span></span>
+   <span class="brand"><span id="brand">Computador</span></span>
    <div id="tasks"></div>
    <span id="phl" class="phl">Fase 1/2</span>
    <div class="hud"><b id="sc">0</b><span>pts</span><span id="st"></span></div>
@@ -404,32 +571,38 @@ const SPQ={busy:false,next:null};
 let spT=0;
 const CATL={'email-link':'E-mail com link ou anexo','email-social':'E-mail de engenharia social','chat-social':'Chat: engenharia social','popup':'Pop-ups e alertas falsos','email-ok':'E-mail verdadeiro','chat-ok':'Chat verdadeiro','ia':'Golpes com IA'};
 const pct=(h,t)=>t?Math.round(h/t*100):0;
-async function makeCert(){
- try{await Promise.all([document.fonts.load('800 80px Sora'),document.fonts.load('700 30px Sora'),document.fonts.load('400 30px "Atkinson Hyperlegible"'),document.fonts.load('700 30px "Atkinson Hyperlegible"')]);}catch(e){}
- const W=1600,H=1130,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+/* Certificado do funcionário: documento simples (fio de 1 px, sem gradiente nem escudo) com código de verificação */
+const VERIF_URL=()=>location.origin+location.pathname.replace(/[^\/]*$/,'')+'verificar.html';
+const CALF='ABCDEFGHJKMNPQRSTUVWXYZ23456789',cgen=()=>{let r='CC-';for(let i=0;i<8;i++){if(i===4)r+='-';r+=CALF[Math.floor(Math.random()*CALF.length)];}return r;};
+async function codigoCert(){
+ const n=nv();if(n.cert&&n.cert.codigo)return n.cert.codigo;
+ const uid=await playerAuth(),db=await pdb();if(!db||!uid)throw{code:'unavailable'};
+ await db.collection('empresas').doc(EID).collection('sessoes').doc(uid).set({chave:CHAVE,em:Date.now()});
+ const nomeNivel=(CAT&&CAT.nomeNivel)||'Básico';
+ for(let k=0;k<3;k++){const cod=cgen();
+  try{await db.collection('certificados').doc(cod).set({tipo:'funcionario',empresaId:EID,empresa:RAWN,nivel:'Nível '+nomeNivel,nome:PNAME,emitidoEm:Date.now()});
+   sendProgress(false,{cert:{codigo:cod,em:Date.now()}});return cod;}
+  catch(e){if(k===2)throw e;}}
+}
+async function makeCert(cod){
+ try{await Promise.all([document.fonts.load('400 30px "Atkinson Hyperlegible"'),document.fonts.load('700 30px "Atkinson Hyperlegible"')]);}catch(e){}
+ const W=1600,H=1130,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d'),F='"Atkinson Hyperlegible", Arial, sans-serif';
+ const fit=(t,max,w,sz)=>{let f=sz;x.font=w+' '+f+'px '+F;while(x.measureText(t).width>max&&f>22){f-=2;x.font=w+' '+f+'px '+F;}};
  x.fillStyle='#fff';x.fillRect(0,0,W,H);
- let g=x.createLinearGradient(0,0,W,300);g.addColorStop(0,'#0b2a52');g.addColorStop(1,'#1d63d8');x.fillStyle=g;x.fillRect(0,0,W,300);
- x.strokeStyle='rgba(124,196,255,.14)';x.lineWidth=1;for(let i=0;i<=W;i+=40){x.beginPath();x.moveTo(i,0);x.lineTo(i,300);x.stroke();}for(let j=0;j<=300;j+=40){x.beginPath();x.moveTo(0,j);x.lineTo(W,j);x.stroke();}
- x.save();x.translate(W/2-38.4,58);x.scale(3.2,3.2);
- let sg=x.createLinearGradient(0,0,24,28);sg.addColorStop(0,'#6fdcff');sg.addColorStop(1,'#1d63d8');x.fillStyle=sg;x.fill(new Path2D('M12 1l9 3.5V13c0 6-4 10-9 13-5-3-9-7-9-13V4.5z'));
- x.strokeStyle='#c4f1ff';x.lineWidth=.6;x.stroke(new Path2D('M12 1l9 3.5V13c0 6-4 10-9 13-5-3-9-7-9-13V4.5z'));
- x.strokeStyle='#fff';x.lineWidth=2.2;x.lineCap='round';x.lineJoin='round';x.stroke(new Path2D('M7.5 13.5l3.2 3.2 6-6.8'));x.restore();
- x.textAlign='center';x.textBaseline='alphabetic';
- x.fillStyle='#fff';x.font='800 56px Sora, sans-serif';x.fillText('Clique Certo',W/2,205);
- x.fillStyle='#9fd4f5';x.font='700 26px Sora, sans-serif';try{x.letterSpacing='6px';}catch(e){}x.fillText('CERTIFICADO DE CONCLUSÃO',W/2,260);try{x.letterSpacing='0px';}catch(e){}
- x.fillStyle='#566679';x.font='400 38px "Atkinson Hyperlegible", sans-serif';x.fillText('Certificamos que',W/2,410);
- let nm=PNAME||'Participante',fs=100;x.font='800 '+fs+'px Sora, sans-serif';while(x.measureText(nm).width>1300&&fs>40){fs-=4;x.font='800 '+fs+'px Sora, sans-serif';}
- x.fillStyle='#0b2a52';x.fillText(nm,W/2,540);
- let lg=x.createLinearGradient(350,0,1250,0);lg.addColorStop(0,'rgba(53,200,255,0)');lg.addColorStop(.5,'#2f8cff');lg.addColorStop(1,'rgba(53,200,255,0)');x.fillStyle=lg;x.fillRect(350,572,900,4);
- x.fillStyle='#12202e';x.font='400 38px "Atkinson Hyperlegible", sans-serif';x.fillText('concluiu o treinamento de conscientização em segurança digital',W/2,650);
- x.font='700 44px "Atkinson Hyperlegible", sans-serif';x.fillStyle='#1d63d8';x.fillText(RAWN,W/2,716);
- const R=RES||{hit:0,total:0,score:0,rank:''},bx=[['Acertos',R.hit+' de '+R.total],['Pontuação',String(R.score)],['Nível',R.rank]];
- bx.forEach((b,i)=>{const X=130+i*(420+40);x.fillStyle='#eef3f9';x.beginPath();x.roundRect?x.roundRect(X,790,420,150,22):x.rect(X,790,420,150);x.fill();
-  x.fillStyle='#1d63d8';let f=56;x.font='800 '+f+'px Sora, sans-serif';while(x.measureText(b[1]).width>380&&f>26){f-=3;x.font='800 '+f+'px Sora, sans-serif';}x.fillText(b[1],X+210,865);
-  x.fillStyle='#566679';x.font='400 28px "Atkinson Hyperlegible", sans-serif';x.fillText(b[0],X+210,912);});
- x.textAlign='left';x.fillStyle='#566679';x.font='400 28px "Atkinson Hyperlegible", sans-serif';x.fillText('Emitido em '+new Date().toLocaleDateString('pt-BR'),130,1040);
- x.textAlign='right';x.fillText('Treinamento Clique Certo · '+RAWN,W-130,1040);
- let bg=x.createLinearGradient(0,0,W,0);bg.addColorStop(0,'#0b2a52');bg.addColorStop(1,'#2cc3ff');x.fillStyle=bg;x.fillRect(0,H-14,W,14);
+ x.strokeStyle='#b9c1cc';x.lineWidth=1;x.strokeRect(60.5,60.5,W-121,H-121);
+ x.textBaseline='alphabetic';x.textAlign='left';x.fillStyle='#13233a';x.font='700 34px '+F;x.fillText('Clique Certo',120,150);
+ x.textAlign='right';x.fillStyle='#5c6775';x.font='400 28px '+F;x.fillText('Ativa Security',W-120,150);
+ x.fillStyle='#dde1e7';x.fillRect(120,180,W-240,1);
+ x.textAlign='center';x.fillStyle='#13233a';x.font='700 58px '+F;x.fillText('Certificado de conclusão',W/2,300);
+ x.fillStyle='#5c6775';x.font='400 32px '+F;x.fillText('Certificamos que',W/2,390);
+ const nm=PNAME||'Participante';fit(nm,W-320,'700',84);x.fillStyle='#13233a';x.fillText(nm,W/2,490);
+ x.fillStyle='#1c2430';x.font='400 32px '+F;x.fillText('concluiu o treinamento',W/2,570);
+ const nivelTxt='Conscientização em Segurança Digital — Nível '+((CAT&&CAT.nomeNivel)||'Básico');fit(nivelTxt,W-320,'700',46);x.fillStyle='#1f4e8c';x.fillText(nivelTxt,W/2,640);
+ fit('oferecido por '+RAWN,W-320,'400',32);x.fillStyle='#1c2430';x.fillText('oferecido por '+RAWN,W/2,700);
+ x.fillStyle='#dde1e7';x.fillRect(120,880,W-240,1);
+ x.textAlign='left';x.fillStyle='#5c6775';x.font='400 26px '+F;x.fillText('Emitido em',120,930);x.fillStyle='#13233a';x.font='700 30px '+F;x.fillText(new Date().toLocaleDateString('pt-BR'),120,972);
+ x.textAlign='right';x.fillStyle='#5c6775';x.font='400 26px '+F;x.fillText('Código de verificação',W-120,930);x.fillStyle='#13233a';x.font='700 30px '+F;x.fillText(cod||'',W-120,972);
+ x.textAlign='center';x.fillStyle='#5c6775';x.font='400 24px '+F;x.fillText('Verifique em '+VERIF_URL()+'#'+(cod||''),W/2,1030);
  return c.toDataURL('image/png');
 }
 
@@ -461,7 +634,9 @@ const ic=(k,c)=>'<span class="ic'+(c?' '+c:'')+'"><svg viewBox="0 0 24 24" fill=
 const nm=n=>'<span class="ic n">'+n+'</span>';
 const row=(i,t,d)=>'<div>'+i+'<span><b>'+t+'</b>'+d+'</span></div>';
 const tile=(c,p)=>'<svg viewBox="0 0 56 56"><rect width="56" height="56" rx="15" fill="'+c+'"/><svg x="12" y="12" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg></svg>';
-const ICON={mail:tile('#0f6cbd',IC.mail),chat:'<svg viewBox="0 0 56 56"><defs><linearGradient id="cgi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a8cf8"/><stop offset="1" stop-color="#5b3fd1"/></linearGradient></defs><rect width="56" height="56" rx="15" fill="url(#cgi)"/><path d="M15 11h18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-9l-6 5v-5h-3a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4z" fill="#fff"/><circle cx="20" cy="20" r="1.9" fill="#6d4fe0"/><circle cx="25" cy="20" r="1.9" fill="#6d4fe0"/><circle cx="30" cy="20" r="1.9" fill="#6d4fe0"/><path d="M27 26h14a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-2v5l-6-5h-6a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" fill="#ece8ff" stroke="#5b3fd1" stroke-width="1.6" stroke-linejoin="round"/></svg>'};
+const flat=p=>'<svg viewBox="0 0 56 56"><rect x=".5" y=".5" width="55" height="55" rx="6" fill="#fff" stroke="#b9c1cc"/><svg x="14" y="14" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#13233a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg></svg>';
+const ICON0={mail:tile('#0f6cbd',IC.mail),chat:'<svg viewBox="0 0 56 56"><defs><linearGradient id="cgi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9a8cf8"/><stop offset="1" stop-color="#5b3fd1"/></linearGradient></defs><rect width="56" height="56" rx="15" fill="url(#cgi)"/><path d="M15 11h18a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-9l-6 5v-5h-3a4 4 0 0 1-4-4V15a4 4 0 0 1 4-4z" fill="#fff"/><circle cx="20" cy="20" r="1.9" fill="#6d4fe0"/><circle cx="25" cy="20" r="1.9" fill="#6d4fe0"/><circle cx="30" cy="20" r="1.9" fill="#6d4fe0"/><path d="M27 26h14a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-2v5l-6-5h-6a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4z" fill="#ece8ff" stroke="#5b3fd1" stroke-width="1.6" stroke-linejoin="round"/></svg>'};
+const ICON={mail:flat(IC.mail),chat:flat(IC.chat)};
 
 const VW=(h,b,cap)=>'<div class="vis"><svg viewBox="0 0 440 '+h+'" role="img" aria-hidden="true">'+b+'</svg>'+(cap?'<p class="vcap">'+cap+'</p>':'')+'</div>';
 const VIS={
@@ -488,8 +663,8 @@ const ping=()=>{tone(988,0,.1,'sine',.1);tone(1318,.09,.18,'sine',.1);};
 function good(st){const k=1+.06*Math.min(st,8);tone(660*k,0,.12,'triangle',.16);tone(880*k,.08,.12,'triangle',.16);tone(1320*k,.16,.3,'triangle',.16);}
 function bad(){tone(190,0,.3,'sawtooth',.1);tone(140,.14,.4,'sawtooth',.1);try{navigator.vibrate&&navigator.vibrate(120);}catch(e){}}
 function win(){[523,659,784,1047,1319].forEach((f,i)=>tone(f,i*.12,.3,'triangle',.16));burst(innerWidth/2,innerHeight/3,60);}
-function burst(x,y,n){if(RM)return;const cols=['#5bd48b','#f2b705','#6cc4e0','#ff7a59','#fff'];for(let i=0;i<n;i++){const d=document.createElement('i');d.className='sp';d.style.cssText='left:'+x+'px;top:'+y+'px;background:'+cols[i%cols.length];document.body.appendChild(d);const a=Math.random()*6.283,r=60+Math.random()*140;d.animate([{transform:'translate(0,0) rotate(0deg)',opacity:1},{transform:'translate('+Math.cos(a)*r+'px,'+(Math.sin(a)*r+80)+'px) rotate('+Math.random()*720+'deg)',opacity:0}],{duration:700+Math.random()*500,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>d.remove();}}
-function flash(c){if(RM)return;const f=$('#fx');f.style.background=c;f.animate([{opacity:.4},{opacity:0}],{duration:450});}
+function burst(x,y,n){return;const cols=['#5bd48b','#f2b705','#6cc4e0','#ff7a59','#fff'];for(let i=0;i<n;i++){const d=document.createElement('i');d.className='sp';d.style.cssText='left:'+x+'px;top:'+y+'px;background:'+cols[i%cols.length];document.body.appendChild(d);const a=Math.random()*6.283,r=60+Math.random()*140;d.animate([{transform:'translate(0,0) rotate(0deg)',opacity:1},{transform:'translate('+Math.cos(a)*r+'px,'+(Math.sin(a)*r+80)+'px) rotate('+Math.random()*720+'deg)',opacity:0}],{duration:700+Math.random()*500,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=()=>d.remove();}}
+function flash(c){return;const f=$('#fx');f.style.background=c;f.animate([{opacity:.4},{opacity:0}],{duration:450});}
 function shake(){if(RM)return;const t=$('#pop').hidden?$('#win'):document.querySelector('.popw');if(!t||t.hidden)return;try{t.animate([{translate:'0'},{translate:'-10px'},{translate:'10px'},{translate:'-6px'},{translate:'6px'},{translate:'0'}],{duration:350});}catch(e){}}
 function updHud(){$('#sc').textContent=S.score;$('#st').textContent=S.streak>1?'x'+S.streak:'';if(!RM)$('#sc').animate([{transform:'scale(1.6)'},{transform:'scale(1)'}],{duration:300});}
 
@@ -533,7 +708,7 @@ function actions(x){
  const r=S.res[x.id],o=x.opts||{go:'Parece seguro',stop:'Reportar como golpe'};
  if(r){const ok=(r.choice==='stop')===x.phish,last=S.cur>=S.set.length;
   const t=x.phish?(ok?'Muito bem! Era golpe.':'Cuidado! Era golpe.'):(ok?'Correto! Esta mensagem é verdadeira.':'Esta mensagem era verdadeira.');
-  return '<div class="res '+(ok?'okk':'no')+'"><div class="rh">'+ic(ok?'check':'alert')+'<h3>'+t+'</h3></div>'+(ok?'<p class="pts">+'+r.pts+' pontos'+(r.st>1?' · sequência x'+r.st:'')+'</p>':'')+'<ul>'+x.why.map(y=>'<li>'+y+'</li>').join('')+'</ul>'+(x.iaNote?'<div class="ianote"><b>O que a IA mudou:</b> '+x.iaNote+'</div>':'')+
+  return '<div class="res '+(ok?'okk':'no')+'"><div class="rh">'+ic(ok?'check':'alert')+'<h3>'+t+'</h3></div>'+(ok?'<p class="pts">+'+r.pts+' pontos'+(r.st>1?' · sequência x'+r.st:'')+'</p>':'')+'<ul>'+x.why.map(y=>'<li>'+y+'</li>').join('')+'</ul>'+(x.iaNote?'<p class="ianote"><b>O que a IA mudou:</b> '+x.iaNote+'</p>':'')+
    (x.phish&&!ok?'<p><b>Se fosse real:</b> '+x.risk+'</p>':'')+
    (x.phish?'<p><b>O que fazer:</b> não clique, não responda e avise a TI.</p>':(!ok?'<p>Desconfiar é bom, mas aqui não era preciso reportar.</p>':''))+
    '<button class="b" data-act="cont">'+(last?(PH===1?'Concluir a fase 1':'Ver meu resultado'):'Continuar')+'</button></div>';}
@@ -549,7 +724,7 @@ function popHTML(x){
  const r=S.res[x.id];
  return '<div class="popw"><header><span class="tt">'+ic(POPIC[x.id]||'win')+'<span>'+x.name+' <small>'+(x.win?'· '+x.win:'')+'</small></span></span><span class="wc"><i></i><i></i></span></header><div class="in dbody'+(r?' done':'')+'">'+(VIS[x.id]||'')+x.body+(r?actions(x):(function(){const g='<button class="b neu" data-act="dec" data-id="'+x.id+'" data-c="go">'+x.opts.go+'</button>',t='<button class="b neu" data-act="dec" data-id="'+x.id+'" data-c="stop">'+x.opts.stop+'</button>';return '<div class="decide">'+(x.id%2?g+t:t+g)+'</div>';})())+'</div></div>';
 }
-function showPop(x){const p=$('#pop');p.hidden=false;p.innerHTML=popHTML(x);}
+function showPop(x){const p=$('#pop');p.hidden=false;p.innerHTML=popHTML(x);p.scrollTop=0;const r=p.querySelector('.res');if(r)requestAnimationFrame(()=>r.scrollIntoView({block:'start',behavior:'smooth'}));}
 function dec(id,c,ev){
  const x=it(id);if(!x||S.res[id]||Date.now()<S.lock)return;
  const ok=(c==='stop')===x.phish;let pts=0;
@@ -610,16 +785,22 @@ function boot(){
    return Promise.all([db.collection('catalogo').doc(EMPD.nivel1||'nivel1-v1').get(),db.collection('catalogo').doc(EMPD.aviso||'aviso-v1').get()]);});
  }).then(r=>{if(!r[0].exists)throw{code:'catalogo'};
   RAWN=EMPD.nome||'Empresa';EMP=esc(RAWN);DOM=cleanDom(EMPD.dominio||'')||'empresa.com.br';setCat(r[0].data());AVISO=r[1].exists?r[1].data():null;
-  $('#brand').textContent=RAWN.toUpperCase()+' PC';$('#spName').textContent=RAWN;$('#acEmp').textContent=RAWN;$('#lbCod').textContent=rotulo();$('#inCod').placeholder=EMPD.rotuloCodigo==='matricula'?'Sua matrícula':'Código recebido do RH';
-  show('splash');spT=setTimeout(afterSplash,2200);
+  $('#brand').textContent='Computador · '+RAWN;$('#spName').textContent=RAWN;$('#acEmp').textContent=RAWN;$('#lbCod').textContent=rotulo();$('#inCod').placeholder=EMPD.rotuloCodigo==='matricula'?'Sua matrícula':'Ex.: K7QM2X';
+  afterSplash();
  }).catch(e=>{const c=ecode(e);erroFatal(c==='not-found'||/permission/i.test(c)?'Este link não está ativo. Fale com o RH da sua empresa.':c==='catalogo'?'O conteúdo do treinamento ainda não foi publicado. Fale com a Ativa Security.':pMsg(e));});
 }
 function afterSplash(){clearTimeout(spT);const v=AVISO?AVISO.versao:0;let ok=false;try{ok=localStorage.getItem('cs_aviso_'+EID)===String(v);}catch(e){}if(AVISO&&!ok)return openAviso();openAcesso();}
 function openAviso(){const p=Object.assign({},(AVISO&&AVISO.padroes)||{},(EMPD&&EMPD.privacidade)||{});
  let h=fill(AVISO.html).split('{{retencaoMeses}}').join(esc(p.retencaoMeses||12)).split('{{emailPrivacidade}}').join(esc(p.emailPrivacidade||'privacidade@ativait.com.br'));
  $('#avTxt').innerHTML=h;$('#avOk').textContent=AVISO.botao||'Li e quero continuar';show('aviso');$('#aviso').scrollTop=0;}
+document.addEventListener('click',e=>{if(e.target&&e.target.id==='acPriv')openAviso();});
 function aceitarAviso(){try{localStorage.setItem('cs_aviso_'+EID,String(AVISO.versao));}catch(e){}openAcesso();}
-function openAcesso(){show('acesso');$('#acForm').hidden=false;$('#acMsg').hidden=true;$('#acErr').hidden=true;setTimeout(()=>{try{$('#inEm').focus();}catch(e){}},50);}
+function openAcesso(){const mat=EMPD&&EMPD.rotuloCodigo==='matricula',dom=EMPD&&cleanDom(EMPD.dominio||'');
+ $('#acNivel').textContent='Treinamento de segurança digital · Nível '+((CAT&&CAT.nomeNivel)||'Básico');
+ $('#inEm').placeholder=dom?'nome@'+dom:'nome.sobrenome@empresa.com.br';
+ $('#acHelp').textContent=mat?'Está no seu crachá ou holerite. Em caso de dúvida, fale com o RH.':'Código de 6 caracteres enviado pelo RH. Em caso de dúvida, fale com o RH.';
+ $('#acNota').textContent='Seu progresso fica salvo. Para continuar em outro aparelho, entre com o mesmo e-mail e '+(mat?'matrícula':'código')+'.';
+ show('acesso');$('#acForm').hidden=false;$('#acMsg').hidden=true;$('#acErr').hidden=true;setTimeout(()=>{try{$('#inEm').focus();}catch(e){}},50);}
 
 /* ---------- Login: e-mail + matrícula/código ---------- */
 let FAIL=0,FAILT=0;
@@ -643,7 +824,7 @@ function progRef(db){return db.collection('empresas').doc(EID).collection('progr
 function regAparelho(){
  const ua=navigator.userAgent,mob=/Mobi|Android|iPhone|iPad/i.test(ua),so=/Android/i.test(ua)?'Android':/iPhone|iPad|iOS/i.test(ua)?'iPhone/iPad':/Windows/i.test(ua)?'Windows':/Mac/i.test(ua)?'Mac':'outro';
  let p0=Date.now();try{const k='cs_dev_'+EID+'_'+CHAVE;p0=+(localStorage.getItem(k)||p0);localStorage.setItem(k,String(p0));}catch(e){}
- Promise.all([playerAuth(),pdb()]).then(r=>{const uid=r[0],db=r[1];if(!uid||!db)return;return progRef(db).collection('aparelhos').doc(uid).set({primeiro:p0,ultimo:Date.now(),tipo:(mob?'celular':'computador')+' · '+so},{merge:true});}).catch(()=>{});
+ Promise.all([playerAuth(),pdb()]).then(r=>{const uid=r[0],db=r[1];if(!uid||!db)return;return Promise.all([progRef(db).collection('aparelhos').doc(uid).set({primeiro:p0,ultimo:Date.now(),tipo:(mob?'celular':'computador')+' · '+so},{merge:true}),db.collection('empresas').doc(EID).collection('sessoes').doc(uid).set({chave:CHAVE,em:Date.now()})]);}).catch(()=>{});
 }
 
 /* ---------- Progresso no servidor (por e-mail + código) ---------- */
@@ -690,17 +871,17 @@ function finish(){
  $('#pop').hidden=true;$('#win').hidden=true;$('#toast').hidden=true;
  if(PH===1)return endPhase1();
  const s1=phStat(ORD[0]),s2=phStat(ORD[1]),hit=s1.h+s2.h;
- RES={hit:hit,total:ITEMS.length,score:S.score,rank:S.shield>=100?'Guardião':S.shield>=60?'Profissional atento':'Em treinamento'};
+ RES={hit:hit,total:ITEMS.length,score:S.score};
  PH='fim';sendProgress(true,{pos:{h:s2.h,t:s2.t,fim:Date.now()},concluidoEm:Date.now(),res:RES});telaFinal();}
 function telaFinal(){
  SCR.forEach(i=>{$('#'+i).hidden=true;});$('#desk').hidden=false;$('#win').hidden=true;$('#pop').hidden=true;$('#toast').hidden=true;
  const n=nv(),p1=n.pre||phStat(ORD[0]),s2=n.pos||phStat(ORD[1]),miss=Object.keys(S.res).filter(i=>!S.res[i].ok).map(i=>it(+i)).filter(Boolean);
- if(!RES)RES=n.res||{hit:p1.h+s2.h,total:ITEMS.length,score:S.score,rank:''};
+ if(!RES)RES=n.res||{hit:p1.h+s2.h,total:ITEMS.length,score:S.score};
  const dl=pct(s2.h,s2.t)-pct(p1.h,p1.t),e=$('#end');e.hidden=false;try{win();}catch(x){}
- e.innerHTML='<div class="card"><p style="margin:0;color:var(--mute)">Nível 1 concluído</p><div class="big">'+s2.h+' de '+s2.t+'</div><p>acertos no pós-teste. Segurança da empresa: <b>'+Math.max(0,S.shield)+'%</b></p>'+
-  '<div class="evo"><div><small>Pré-teste</small><b>'+p1.h+'/'+p1.t+'</b></div><span>→</span><div><small>Pós-teste</small><b>'+s2.h+'/'+s2.t+'</b></div></div><p class="evt">'+(dl>0?'Você evoluiu <b>+'+dl+' pontos percentuais</b> (p.p.) depois da aula.':dl===0?'Você manteve o mesmo nível antes e depois da aula.':'O pós-teste foi mais difícil para você. Revise os pontos abaixo.')+'</p>'+
-  (miss.length?'<p><b>Para rever:</b></p><ul class="miss">'+miss.map(m=>'<li>'+m.subj+' ('+(m.phish?'era golpe':'era verdadeira')+')</li>').join('')+'</ul>':'<p>Você não errou nenhuma. Parabéns!</p>')+
-  '<p><b>'+RULES.length+' regras de ouro</b></p><ol class="rules">'+RULES.map(r=>'<li>'+r+'</li>').join('')+'</ol><button class="b" id="certBtn" style="width:100%;margin-bottom:8px">Gerar meu certificado</button><button class="b neu" id="sair" style="width:100%">Sair</button>'+
+ e.innerHTML='<div class="card"><p class="eyebrow">Nível 1 concluído</p><h1>Treinamento concluído</h1><p class="lead">Você acertou <b>'+s2.h+' de '+s2.t+'</b> mensagens no pós-teste.</p>'+
+  '<div class="evo"><div><small>Pré-teste</small><b>'+p1.h+' de '+p1.t+'</b></div><div><small>Pós-teste</small><b>'+s2.h+' de '+s2.t+'</b></div></div><p class="evt">'+(dl>0?'Você evoluiu <b>+'+dl+' pontos percentuais</b> (p.p.) depois da aula.':dl===0?'Você manteve o mesmo nível antes e depois da aula.':'O pós-teste foi mais difícil para você. Revise os pontos abaixo.')+'</p>'+
+  (miss.length?'<h2>Para rever</h2><ul class="miss">'+miss.map(m=>'<li>'+m.subj+' ('+(m.phish?'era golpe':'era verdadeira')+')</li>').join('')+'</ul>':'<p>Você não errou nenhuma. Parabéns!</p>')+
+  '<h2>'+RULES.length+' cuidados para o dia a dia</h2><ol class="rules">'+RULES.map(r=>'<li>'+r+'</li>').join('')+'</ol><div class="acts"><button class="b" id="certBtn">Gerar meu certificado</button><button class="b neu" id="sair">Sair</button></div>'+
   '<p class="mini" style="margin-top:10px">Sua pontuação individual não é enviada ao seu gestor. A empresa recebe só quem concluiu e resultados agrupados.</p></div>';
 }
 document.addEventListener('click',e=>{
@@ -712,7 +893,9 @@ document.addEventListener('click',e=>{
  if(e.target.id==='avOk')return aceitarAviso();
  if(e.target.id==='acGo')return entrar();
  if(e.target.id==='mGo')return openAula();
- if(e.target.id==='certBtn'){makeCert().then(u=>{$('#certImg').src=u;$('#certDl').href=u;show('cert');});return;}
+ if(e.target.id==='certBtn'){const b=e.target;b.disabled=true;b.textContent='Gerando...';
+  codigoCert().then(cod=>makeCert(cod).then(u=>{$('#certImg').src=u;$('#certDl').href=u;$('#certDl').download='certificado-'+cod+'.png';$('#certCod').textContent='Código de verificação: '+cod+'. Qualquer pessoa pode conferir em '+VERIF_URL()+'.';show('cert');}))
+  .catch(er=>{b.disabled=false;b.textContent='Gerar meu certificado';pBan('Não foi possível gerar o certificado agora ('+pMsg(er)+'). Tente de novo em instantes.');});return;}
  if(e.target.id==='certBack')return telaFinal();
  if(e.target.id==='sair'){CHAVE='';FUNC=null;PROG=null;$('#end').hidden=true;$('#inCod').value='';return openAcesso();}
  const l=e.target.closest('.lnk');

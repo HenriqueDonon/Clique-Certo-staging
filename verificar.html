@@ -1,0 +1,19 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clique Certo · Verificar certificado</title>
+<style>:root{--ink:#12202e;--mute:#566679;--line:#d6e0ec;--ok:#1f7a4d;--bad:#b3261e}body{margin:0;font-family:system-ui,sans-serif;background:#eef3f9;color:var(--ink);padding:16px}main{max-width:520px;margin:24px auto;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px}h1{font-size:1.2rem;margin:0}input{font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;text-transform:uppercase}button{font:inherit;font-weight:700;padding:10px;border:0;border-radius:8px;background:#1d63d8;color:#fff}.ok{color:var(--ok)}.err{color:var(--bad)}dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0}dt{color:var(--mute)}dd{margin:0;font-weight:700}</style></head>
+<body><main><h1>Clique Certo · Verificar certificado da empresa</h1><p style="color:var(--mute);margin:0">Digite o código impresso no certificado (ex.: CC-ABCD-EFGH).</p>
+<input id="cod" maxlength="14" autocomplete="off"><button id="ver">Verificar</button><div id="out" role="status"></div></main>
+<script type="module">
+const FBS={prod:{apiKey:'AIzaSyAnhxp6ZFClK444gO7H9agTDz7w01-vy1Y',authDomain:'clique-certo-4d160.firebaseapp.com',projectId:'clique-certo-4d160',appId:'1:676633305699:web:ea943d4e80d3e1d411ce56'},staging:{apiKey:'AIzaSyAAgrLJOAOPwo10EiviKmTbNJuhrmn08L0',authDomain:'clique-certo-staging-18f27.firebaseapp.com',projectId:'clique-certo-staging-18f27',appId:'1:114147569148:web:bc7237b215285a6ac81679'}};
+const ENV=/\/Clique-Certo\/(verificar\.html)?$/i.test(location.pathname)&&/github\.io$/.test(location.hostname)?'prod':'staging';
+const APPCHECK={prod:'',staging:''};
+const G='https://www.gstatic.com/firebasejs/10.12.2/';const [{initializeApp},F]=await Promise.all([import(G+'firebase-app.js'),import(G+'firebase-firestore.js')]);
+const app=initializeApp(FBS[ENV]),db=F.getFirestore(app);
+if(APPCHECK[ENV]&&!window.__EMU){try{const AC=await import(G+'firebase-app-check.js');AC.initializeAppCheck(app,{provider:new AC.ReCaptchaV3Provider(APPCHECK[ENV]),isTokenAutoRefreshEnabled:true});}catch(e){}}
+if(window.__EMU)F.connectFirestoreEmulator(db,'127.0.0.1',8080);
+const $=s=>document.querySelector(s),esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function ver(){const c=$('#cod').value.trim().toUpperCase().replace(/\s/g,''),o=$('#out');if(!/^CC-[A-Z2-9]{4}-[A-Z2-9]{4}$/.test(c)){o.innerHTML='<p class="err">Código em formato inválido.</p>';return;}
+ o.textContent='Verificando...';try{const d=await F.getDoc(F.doc(db,'certificados',c));if(!d.exists()){o.innerHTML='<p class="err">Certificado não encontrado. Confira o código.</p>';return;}const x=d.data();
+ o.innerHTML='<p class="ok"><b>✓ Certificado válido</b></p><dl><dt>Empresa</dt><dd>'+esc(x.empresa)+'</dd><dt>Nível</dt><dd>'+esc(x.nivel)+'</dd><dt>Conclusão</dt><dd>'+esc(x.pct)+'% ('+esc(x.concluidos)+' de '+esc(x.ativos)+' funcionários ativos)</dd><dt>Emitido em</dt><dd>'+new Date(x.emitidoEm).toLocaleDateString('pt-BR')+'</dd><dt>Emitido por</dt><dd>Ativa Security</dd></dl>';}
+ catch(e){o.innerHTML='<p class="err">Não foi possível verificar agora.</p>';}}
+$('#ver').onclick=ver;$('#cod').onkeydown=e=>{if(e.key==='Enter')ver();};const h=location.hash.slice(1);if(h){$('#cod').value=h;ver();}
+</script></body></html>

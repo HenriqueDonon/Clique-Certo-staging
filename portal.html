@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Clique Certo · Portal da Ativa</title>
+<script src="config.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
 :root{--bg:#eef3f9;--paper:#fff;--ink:#12202e;--mute:#566679;--line:#d6e0ec;--accent:#1d63d8;--ok:#1f7a4d;--okbg:#e2f4e9;--bad:#b3261e;--badbg:#fde8e6;--warn:#8a5a00;--warnbg:#fff3d6;--nav:#0b2a52}
@@ -18,7 +19,7 @@ input,select,textarea{font:inherit;padding:9px 10px;border:1px solid var(--line)
 textarea{min-height:140px;font-family:ui-monospace,Consolas,monospace;font-size:.85rem}
 label{font-size:.85rem;font-weight:600;color:var(--mute);display:grid;gap:4px}
 button{font:inherit;font-weight:700;padding:9px 14px;border:0;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer;white-space:nowrap}
-button.sec{background:#e3e9f1;color:var(--ink)}button.dan{background:var(--badbg);color:var(--bad)}button.dan.armed{background:var(--bad);color:#fff}button:disabled{opacity:.5;cursor:default}
+button.sec{background:#e3e9f1;color:var(--ink)}button.danger{background:#b42318;color:#fff}button.danger:disabled{background:#c9a19c}button.dan{background:var(--badbg);color:var(--bad)}button.dan.armed{background:var(--bad);color:#fff}button:disabled{opacity:.5;cursor:default}
 button.sm{padding:5px 9px;font-size:.82rem}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .msg{font-size:.9rem;color:var(--mute);white-space:pre-wrap;margin:0}.err{color:var(--bad)}.okt{color:var(--ok)}
@@ -38,11 +39,12 @@ code{background:#eef1f5;border-radius:6px;padding:2px 6px;word-break:break-all}
 #rep .rmeta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}#rep .rmeta div{border:1px solid #dbe2ea;border-radius:8px;padding:8px}#rep .rmeta span{display:block;font-size:.72rem;color:#5b6b7a;text-transform:uppercase}#rep .rprep{margin:10px 0 0;color:#5b6b7a}
 #rep .rsec{margin:0 0 20px;border:0;padding:0;background:none;display:block}#pEmail{border:1px solid var(--line);border-radius:8px;padding:12px;margin:8px 0;background:#fff}#pEmail pre{white-space:pre-wrap;background:#f3f6f9;border:1px solid var(--line);border-radius:6px;padding:10px;font:13px/1.5 ui-monospace,Consolas,monospace;margin:8px 0}#pEmail ol{margin:4px 0 8px 18px;padding:0}#pEmail li{margin:2px 0}
 #rep .rsec h3{font-size:.98rem;color:#0b2a52;margin:14px 0 6px}#rep .rsec h2{font-size:1.1rem;color:#0b2a52;border-bottom:1px solid #dbe2ea;padding-bottom:4px;margin:0 0 8px}
-#rep .r3 li{margin:4px 0}#rep .rcert{border:1px solid #dbe2ea;border-radius:6px;padding:6px 10px;font-size:.88rem;margin:6px 0 0}#rep .rhow{background:#f3f6f9;border-left:4px solid #94a3b8;padding:6px 10px;font-size:.85rem;margin:0 0 8px}#rep .rnote{font-size:.82rem;color:#5b6b7a;margin:4px 0}
+#rep .r3 li{margin:4px 0}.rgraf svg{display:block;margin:0}.rrec>li{margin:0 0 8px}.rsub{margin:4px 0 0 0;padding-left:18px}.rsub li{margin:2px 0}
+#rep .rcert{border:1px solid #dbe2ea;border-radius:6px;padding:6px 10px;font-size:.88rem;margin:6px 0 0}#rep .rhow{background:#f3f6f9;border-left:4px solid #94a3b8;padding:6px 10px;font-size:.85rem;margin:0 0 8px}#rep .rnote{font-size:.82rem;color:#5b6b7a;margin:4px 0}
 #rep .rleg{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;margin:0 0 4px}#rep .rleg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
 #rep table{font-size:.85rem}#rep .rmet p{font-size:.82rem;color:#334155}#rep .rft{border-top:1px solid #dbe2ea;padding-top:8px;font-size:.75rem;color:#5b6b7a;display:flex;justify-content:space-between}
 @media(max-width:640px){#rep .rpage{padding:20px 14px}#rep .rmeta{grid-template-columns:repeat(2,1fr)}}
-@media print{@page{size:A4;margin:12mm}html,body{background:#fff!important;min-height:0!important;height:auto!important;padding:0!important;margin:0!important}body>*:not(#rep){display:none!important}#rep{position:static;overflow:visible;background:#fff;padding:0}#rep .rbar{display:none}#rep .rpage{max-width:none;padding:0;border-radius:0}#rep *{-webkit-print-color-adjust:exact;print-color-adjust:exact}#rep tr,#rep svg,#rep .rhow,#rep .rcert,#rep li{break-inside:avoid}#rep h2,#rep h3,#rep .rhow,#rep .rleg{break-after:avoid}}
+@media print{@page{size:A4;margin:0}#rep .rpage{padding:12mm 14mm!important;font-size:12.5px!important}#rep .rsec{margin:0 0 12px!important}#rep .rcapa{padding-bottom:10px!important;margin-bottom:10px!important}#rep h2{margin:10px 0 6px}#rep .rhow{margin:0 0 6px}#rep .rleg{margin:2px 0 4px}html,body{background:#fff!important;min-height:0!important;height:auto!important;padding:0!important;margin:0!important}body>*:not(#rep){display:none!important}#rep{position:static;overflow:visible;background:#fff;padding:0}#rep .rbar{display:none}#rep .rpage{max-width:none;padding:0;border-radius:0}#rep *{-webkit-print-color-adjust:exact;print-color-adjust:exact}#rep tr,#rep svg,#rep .rhow,#rep .rcert,#rep li,#rep .rmeta{break-inside:avoid}#rep .rrec>li{break-inside:auto}#rep h2,#rep h3,#rep .rhow,#rep .rleg{break-after:avoid}}
 @media(max-width:640px){header .who{margin-left:0}}
 </style>
 </head>
@@ -59,7 +61,7 @@ code{background:#eef1f5;border-radius:6px;padding:2px 6px;word-break:break-all}
  <div id="vEmpresas" hidden style="display:grid;gap:14px">
   <section><div class="row"><h1 style="flex:1">Empresas</h1><button id="bNova">Nova empresa</button><button class="sec" id="bDemo" hidden>Criar empresa de demonstração</button><button class="sec" id="bAtual">Atualizar</button></div>
    <div id="aAlerta"></div><p class="msg" id="mDemo"></p>
-   <div class="tw"><table><thead><tr><th>Empresa</th><th>Situação</th><th>Funcionários</th><th>Concluíram</th><th>Vários aparelhos</th><th></th></tr></thead><tbody id="tEmp"><tr><td colspan="6">Carregando...</td></tr></tbody></table></div>
+   <div class="tw"><table><thead><tr><th>Empresa</th><th>Situação</th><th>Funcionários ativos</th><th>Concluíram</th><th>Vários navegadores/aparelhos</th><th></th></tr></thead><tbody id="tEmp"><tr><td colspan="6">Carregando...</td></tr></tbody></table></div>
   </section>
  </div>
 
@@ -67,7 +69,10 @@ code{background:#eef1f5;border-radius:6px;padding:2px 6px;word-break:break-all}
   <section>
    <div class="row"><button class="sec sm" id="bVoltar">← Empresas</button><h1 id="eTit" style="flex:1"></h1><span id="eSt"></span></div>
    <div class="kpis" id="eKpi"></div>
-   <div class="row"><button id="bRel">Relatório executivo</button><button class="sec" id="bCert" disabled>Emitir certificado da empresa</button><button class="sec" id="bDelDemo" hidden>Excluir demonstração (tudo)</button></div><p class="msg" id="mCert"></p>
+   <div class="row"><button id="bRel">Relatório executivo</button><button class="sec" id="bCert" disabled>Emitir certificado da empresa</button><button class="sec" id="bDelDemo" hidden>Excluir demonstração (tudo)</button><button class="sec" id="bDelEmp">Excluir empresa</button></div><p class="msg" id="mCert"></p>
+   <div id="pDelEmp" hidden class="pemail"><b>Excluir empresa e todos os dados</b><p class="msg">Apaga definitivamente funcionários, progresso, navegadores/aparelhos, sessões e certificados (da empresa e dos funcionários). Use no fim do prazo de retenção (LGPD). Não pode ser desfeito.</p>
+    <p class="msg"><b>1.</b> Antes, baixe o backup desta empresa e guarde na pasta restrita da Ativa: <button class="sec sm" id="bDelBk">Baixar backup da empresa</button></p>
+    <p class="msg"><b>2.</b> Digite o nome da empresa para confirmar:</p><input id="iDelNome" autocomplete="off"><div class="row" style="margin-top:8px"><button class="danger" id="bDelOk" disabled>Excluir definitivamente</button><button class="sec" id="bDelCanc">Cancelar</button></div><p class="msg" id="mDel"></p></div>
    <div><b>Link único da empresa</b><p class="msg"><code id="eLink"></code></p><div class="row"><button class="sec sm" id="bCopia">Copiar link</button></div></div>
   </section>
   <section>
@@ -88,9 +93,9 @@ code{background:#eef1f5;border-radius:6px;padding:2px 6px;word-break:break-all}
   </section>
   <section id="sImp">
    <h2>Importar funcionários (planilha)</h2>
-   <p class="msg">Colunas: <b>nome</b>, <b>e-mail</b>, <b>setor</b> e, de preferência, <b>matrícula</b>. Separador vírgula, ponto e vírgula ou tabulação. Sem a coluna de matrícula, o portal gera um código de 6 caracteres para cada pessoa. CPF nunca é aceito como código.</p>
+   <p class="msg" id="iInstr"></p>
    <div class="row"><input type="file" id="iArq" accept=".csv,.txt,text/csv" style="max-width:320px"><button class="sec sm" id="bModelo">Baixar modelo</button></div>
-   <textarea id="iTxt" placeholder="nome;email;setor;matricula&#10;Maria Silva;maria.silva@empresa.com.br;Financeiro;10234"></textarea>
+   <textarea id="iTxt"></textarea>
    <div class="row"><button id="bPrev">Conferir planilha</button></div>
    <div id="iPrev"></div>
   </section>
@@ -98,7 +103,7 @@ code{background:#eef1f5;border-radius:6px;padding:2px 6px;word-break:break-all}
    <div class="row"><h2 style="flex:1">Funcionários</h2><input id="fBusca" placeholder="Buscar nome, e-mail ou setor" style="max-width:260px"><button class="sec sm" id="bCsvRh">CSV para o RH</button><button class="sec sm" id="bModEmail">Copiar modelo de e-mail</button><button class="sec sm" id="bBkEmp">Backup desta empresa</button></div>
    <div id="pEmail" hidden class="pemail"></div>
    <div id="eAlerta"></div>
-   <div class="tw"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Setor</th><th id="thCod">Código</th><th>Situação</th><th>Aparelhos</th><th></th></tr></thead><tbody id="tFun"></tbody></table></div>
+   <div class="tw"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Setor</th><th id="thCod">Código</th><th>Situação</th><th>Navegadores/aparelhos</th><th></th></tr></thead><tbody id="tFun"></tbody></table></div>
    <p class="msg">Exclusão (LGPD) apaga o cadastro, o progresso, os aparelhos e o certificado individual da pessoa. Não pode ser desfeita.</p>
   </section>
  </div>
@@ -125,13 +130,14 @@ const DATA={"nivel1-v1": {"id": "nivel1-v1", "tipo": "nivel", "nivel": 1, "versa
 const FBS={
  prod:{apiKey:'AIzaSyAnhxp6ZFClK444gO7H9agTDz7w01-vy1Y',authDomain:'clique-certo-4d160.firebaseapp.com',projectId:'clique-certo-4d160',appId:'1:676633305699:web:ea943d4e80d3e1d411ce56'},
  staging:{apiKey:'AIzaSyAAgrLJOAOPwo10EiviKmTbNJuhrmn08L0',authDomain:'clique-certo-staging-18f27.firebaseapp.com',projectId:'clique-certo-staging-18f27',appId:'1:114147569148:web:bc7237b215285a6ac81679'}};
-const ENV=/\/Clique-Certo\/(portal\.html)?$/i.test(location.pathname)&&/github\.io$/.test(location.hostname)?'prod':'staging';
-const APP_URL=location.origin+location.pathname.replace(/[^\/]*$/,'');
+const CFG=window.CC_CONFIG||{appCheck:{}};
+const ENV=window.CC_ENV||(/\/Clique-Certo\/(portal\.html)?$/i.test(location.pathname)&&/github\.io$/.test(location.hostname)?'prod':'staging');
+const APP_URL=window.CC_URL?window.CC_URL():location.origin+location.pathname.replace(/[^\/]*$/,'');
 const G='https://www.gstatic.com/firebasejs/10.12.2/';
 const [{initializeApp},A,F]=await Promise.all([import(G+'firebase-app.js'),import(G+'firebase-auth.js'),import(G+'firebase-firestore.js')]);
 const app=initializeApp(FBS[ENV]),auth=A.getAuth(app),db=F.getFirestore(app);
 /* App Check (reCAPTCHA v3): preencha a chave do site de cada ambiente. Vazio = desligado. */
-const APPCHECK={prod:'',staging:''};
+const APPCHECK=CFG.appCheck||{prod:'',staging:''};
 if(APPCHECK[ENV]&&!window.__EMU){try{const AC=await import(G+'firebase-app-check.js');AC.initializeAppCheck(app,{provider:new AC.ReCaptchaV3Provider(APPCHECK[ENV]),isTokenAutoRefreshEnabled:true});}catch(e){console.warn('App Check',e);}}
 if(window.__EMU){A.connectAuthEmulator(auth,'http://127.0.0.1:9099',{disableWarnings:true});F.connectFirestoreEmulator(db,'127.0.0.1',8080);} /* só nos testes */
 
@@ -198,11 +204,12 @@ async function listaEmpresas(){
   const lst=[];q.forEach(d=>lst.push({id:d.id,...d.data()}));lst.sort((a,b)=>String(a.nome).localeCompare(String(b.nome),'pt-BR'));
   if(!lst.length){tb.innerHTML='<tr><td colspan="6">Nenhuma empresa cadastrada.</td></tr>';return;}
   const cont=await Promise.all(lst.map(async x=>{const f=F.collection(db,'empresas',x.id,'funcionarios'),p=F.collection(db,'empresas',x.id,'progresso');
-   const [n,c]=await Promise.all([F.getCountFromServer(f),F.getCountFromServer(F.query(p,F.where('niveis.n1.fase','==','fim')))]);return [n.data().count,c.data().count];}));
+   const [n,fim,ina]=await Promise.all([F.getCountFromServer(F.query(f,F.where('ativo','==',true))),F.getDocs(F.query(p,F.where('niveis.n1.fase','==','fim'))),F.getDocs(F.query(f,F.where('ativo','==',false)))]);
+   const fora=new Set();ina.forEach(d=>fora.add(d.id));let c=0;fim.forEach(d=>{const n1=d.data().niveis.n1;if(!fora.has(d.id)&&n1.pre&&n1.pos)c++;});return [n.data().count,c];}));
   let tot=0;
   tb.innerHTML=lst.map((x,i)=>{const [n,c]=cont[i],v=Object.values(ap[x.id]||{}).filter(a=>a.length>1).length;tot+=v;const pc=pct(c,n),meta=x.meta||80;
    return '<tr><td><b>'+esc(x.nome)+'</b>'+(x.demo?' <span class="chip c-warn">DEMO</span>':'')+'<br><small>'+esc(x.dominio||'')+'</small></td><td>'+stChip(x.status)+'</td><td>'+n+'</td><td>'+c+' ('+pc+'%) '+(n?(pc>=meta?'<span class="chip c-ok">✓ meta '+meta+'%</span>':'<span class="chip c-warn">meta '+meta+'%</span>'):'')+'</td><td>'+(v?'<span class="chip c-bad">⚠ '+v+'</span>':'<span class="chip c-neu">0</span>')+'</td><td><button class="sm" data-abre="'+esc(x.id)+'">Abrir</button></td></tr>';}).join('');
-  if(tot)$('#aAlerta').innerHTML='<div class="alert">⚠ '+tot+(tot===1?' funcionário usou':' funcionários usaram')+' mais de um aparelho com o mesmo e-mail. Abra a empresa para ver quem.</div>';
+  if(tot)$('#aAlerta').innerHTML='<div class="alert">⚠ '+tot+(tot===1?' funcionário usou':' funcionários usaram')+' mais de um navegador ou aparelho com o mesmo e-mail. Cada navegador, ou aba anônima, conta separado. Abra a empresa para ver quem.</div>';
  }catch(e){tb.innerHTML='<tr><td colspan="6" class="err">Não foi possível carregar: '+esc(ecode(e))+'</td></tr>';}
 }
 const stChip=s=>s==='ativa'?'<span class="chip c-ok">Ativa</span>':s==='pausada'?'<span class="chip c-warn">Pausada</span>':'<span class="chip c-neu">'+esc(s==='encerrada'?'Encerrada':s||'–')+'</span>';
@@ -221,7 +228,7 @@ function abreForm(){
  $('#fMat').value=e.rotuloCodigo==='codigo'?'nao':'sim';if(!EID){$('#fMat').disabled=false;$('#mMat').textContent='Define o que o app pede ao funcionário ("Matrícula" ou "Código de acesso") e o formato da planilha.';}
  say('#mEmp','');$('#bCancEmp').hidden=!EID;
  ['sImp'].forEach(i=>$('#'+i).hidden=!EID);$('#eTit').textContent=EID?e.nome:'Nova empresa';$('#eSt').innerHTML=EID?stChip(e.status):'';
- $('#eLink').textContent=EID?APP_URL+'#e='+EID:'(gerado ao salvar)';$('#bCopia').hidden=!EID;$('#bRel').hidden=!EID;$('#bCert').hidden=!EID;$('#mCert').textContent='';$('#bDelDemo').hidden=!(EID&&e.demo);$('#pEmail').hidden=true;
+ $('#eLink').textContent=EID?APP_URL+'#e='+EID:'(gerado ao salvar)';$('#bCopia').hidden=!EID;$('#bRel').hidden=!EID;$('#bCert').hidden=!EID;$('#mCert').textContent='';$('#bDelDemo').hidden=!(EID&&e.demo);$('#bDelEmp').hidden=!EID||!!e.demo;$('#pDelEmp').hidden=true;$('#pEmail').hidden=true;
  document.querySelectorAll('#vEmpresa section').forEach((s,i)=>{if(i>1)s.hidden=!EID;});
  opcoesCatalogo().catch(()=>{});
 }
@@ -249,12 +256,12 @@ async function carregaFuncionarios(){
 }
 const situ=k=>{const n=PROGS[k]&&PROGS[k].niveis&&PROGS[k].niveis.n1;if(!n||!n.fase)return['Não iniciou','c-neu'];return n.fase==='fim'?['Concluiu '+fmt(n.concluidoEm),'c-ok']:[{pre:'Pré-teste',aula:'Aula',pos:'Pós-teste'}[n.fase]||n.fase,'c-warn'];};
 function desenhaFuncionarios(){
- const rot=EMPD.rotuloCodigo==='codigo'?'Código':'Matrícula';$('#thCod').textContent=rot;
+ const rot=EMPD.rotuloCodigo==='codigo'?'Código':'Matrícula';$('#thCod').textContent=rot;instrPlanilha();
  $('#fMat').disabled=FUNS.length>0;$('#mMat').textContent=FUNS.length?'Não é possível trocar: já há funcionários cadastrados com '+(EMPD.rotuloCodigo==='codigo'?'código de acesso':'matrícula')+'.':'Define o que o app pede ao funcionário ("Matrícula" ou "Código de acesso") e o formato da planilha.';
  const f=($('#fBusca').value||'').toLowerCase(),l=FUNS.filter(x=>!f||(x.nome+' '+x.email+' '+x.setor).toLowerCase().includes(f));
- const n=FUNS.length,c=FUNS.filter(x=>situ(x.chave)[1]==='c-ok').length,ini=FUNS.filter(x=>situ(x.chave)[0]!=='Não iniciou').length,multi=FUNS.filter(x=>(APS[x.chave]||[]).length>1);
- $('#eKpi').innerHTML='<div class="kpi"><b>'+n+'</b><span>funcionários cadastrados</span></div><div class="kpi"><b>'+ini+'</b><span>começaram</span></div><div class="kpi"><b>'+c+' ('+pct(c,n)+'%)</b><span>concluíram · meta '+(EMPD.meta||80)+'%</span></div><div class="kpi"><b>'+multi.length+'</b><span>com mais de um aparelho</span></div>';
- $('#eAlerta').innerHTML=multi.length?'<div class="alert">⚠ '+multi.length+(multi.length===1?' pessoa usou':' pessoas usaram')+' mais de um aparelho: '+multi.map(x=>esc(x.nome)).join(', ')+'. Não bloqueia o acesso; confirme com o RH se é a mesma pessoa.</div>':'';
+ const AT=FUNS.filter(x=>x.ativo),n=AT.length,c=AT.filter(x=>situ(x.chave)[1]==='c-ok').length,ini=AT.filter(x=>situ(x.chave)[0]!=='Não iniciou').length,multi=FUNS.filter(x=>(APS[x.chave]||[]).length>1);
+ $('#eKpi').innerHTML='<div class="kpi"><b>'+n+'</b><span>funcionários ativos'+(FUNS.length>n?' ('+(FUNS.length-n)+' desativado(s))':'')+'</span></div><div class="kpi"><b>'+ini+'</b><span>começaram</span></div><div class="kpi"><b>'+c+' ('+pct(c,n)+'%)</b><span>concluíram · meta '+(EMPD.meta||80)+'%</span></div><div class="kpi"><b>'+multi.length+'</b><span>com mais de um navegador/aparelho</span></div>';
+ $('#eAlerta').innerHTML=multi.length?'<div class="alert">⚠ '+multi.length+(multi.length===1?' pessoa entrou':' pessoas entraram')+' por mais de um navegador ou aparelho: '+multi.map(x=>esc(x.nome)).join(', ')+'. Cada navegador, ou aba anônima, conta separado (por exemplo, celular e computador, ou Chrome e Edge). Não bloqueia o acesso; se parecer estranho, confirme com o RH se é a mesma pessoa.</div>':'';
  atualizaBotoes();
  $('#tFun').innerHTML=l.length?l.map(x=>{const s=situ(x.chave),a=APS[x.chave]||[];
   return '<tr><td>'+esc(x.nome)+'</td><td>'+esc(x.email)+'</td><td>'+esc(x.setor)+'</td><td><code>'+esc(x.cod)+'</code></td><td><span class="chip '+s[1]+'">'+esc(s[0])+'</span>'+(x.ativo?'':' <span class="chip c-bad">Desativado</span>')+'</td>'+
@@ -388,41 +395,51 @@ function dadosRelatorio(cat){
  const msg={};ativos.forEach(x=>Object.entries(x.n.ans||{}).forEach(([id,ok])=>{const m=msg[id]=msg[id]||[0,0];m[1]++;if(!ok)m[0]++;}));
  const erros=Object.entries(msg).filter(([,m])=>m[1]>=MINGRP).map(([id,m])=>{const i=itens[id]||{};return{id:+id,l:txt(i.tituloRelatorio||i.subj||i.name||('Mensagem '+id)),tag:i.phish?'Golpe':'Verdadeira',v:Math.round(m[0]/m[1]*100),n:m[1]};}).sort((a,b)=>b.v-a.v).slice(0,5);
  /* setores */
- const sAd=porSetor(ativos),sEv=porSetor(conc);
- const adesSet=sAd.grupos.concat(sAd.outros?[sAd.outros]:[]).map(([k,l])=>({k,n:l.length,c:l.filter(x=>x.conc).length}));
- const evoSet=sEv.grupos.concat(sEv.outros?[sEv.outros]:[]).map(([k,l])=>({k,...evo(l),tipos:(()=>{const t={};l.forEach(x=>{const pre=new Set(cat.conjuntos[(x.n.ordem||'AB')[0]]||[]);Object.entries(x.n.ans||{}).forEach(([id,ok])=>{id=+id;if(pre.has(id))return;const c=catDe(id),o=t[c]=t[c]||[0,0];o[0]+=ok;o[1]++;});});return Object.entries(t).map(([c,o])=>({k:c,v:p(...o)})).sort((a,b)=>a.v-b.v);})()}));
+ /* grupos FIXOS para o relatório inteiro, definidos pelo nº de funcionários ATIVOS por setor.
+    O mesmo setor nunca muda de grupo entre seções (evita deduzir resultados por diferença). */
+ const sAd=porSetor(ativos),GR=sAd.grupos.concat(sAd.outros?[sAd.outros]:[]);
+ const adesSet=GR.map(([k,l])=>({k,n:l.length,c:l.filter(x=>x.conc).length}));
+ const GC=GR.map(([k,l])=>[k,l.filter(x=>x.conc)]);
+ const evoSet=GC.map(([k,l])=>l.length<MINGRP?{k,insuf:true,n:l.length}:({k,...evo(l),tipos:(()=>{const t={};l.forEach(x=>{const pre=new Set(cat.conjuntos[(x.n.ordem||'AB')[0]]||[]);Object.entries(x.n.ans||{}).forEach(([id,ok])=>{id=+id;if(pre.has(id))return;const c=catDe(id),o=t[c]=t[c]||[0,0];o[0]+=ok;o[1]++;});});return Object.entries(t).map(([c,o])=>({k:c,v:p(...o)})).sort((a,b)=>a.v-b.v);})()}));
  /* falsos alarmes: mensagens VERDADEIRAS marcadas como golpe (só quem concluiu) */
  const fa=l=>{const o={pre:[0,0],pos:[0,0]};l.forEach(x=>{const pre=new Set(cat.conjuntos[(x.n.ordem||'AB')[0]]||[]);Object.entries(x.n.ans||{}).forEach(([id,ok])=>{const i=itens[id];if(!i||i.phish)return;const f=pre.has(+id)?'pre':'pos';o[f][1]++;if(!ok)o[f][0]++;});});return{n:l.length,pre:p(...o.pre),pos:p(...o.pos)};};
- const faTot=fa(conc),faSet=sEv.grupos.concat(sEv.outros?[sEv.outros]:[]).map(([k,l])=>({k,...fa(l)}));
- const vuln=evoSet.filter(s=>s.k!=='Outros setores').sort((a,b)=>a.pos-b.pos)[0]||null;
+ const faTot=fa(conc),faSet=GC.map(([k,l])=>l.length<MINGRP?{k,insuf:true,n:l.length}:{k,...fa(l)});
+ const vuln=evoSet.filter(s=>!s.insuf&&s.k!=='Outros setores').sort((a,b)=>a.pos-b.pos)[0]||null;
  /* recomendações por setor (sem nomes) */
- const recs=[],R=cat.recomendacoes||{};
- adesSet.forEach(s=>{const v=p(s.c,s.n);if(v<meta)recs.push(['<b>'+esc(s.k)+'</b>: adesão de '+v+'% (meta '+meta+'%). Reforçar a comunicação com o setor e combinar um horário para concluir o treinamento.']);});
- evoSet.forEach(s=>{const w=s.tipos.find(t=>t.v<metas.acerto);if(w)recs.push(['<b>'+esc(s.k)+'</b>: menor acerto em '+esc((cat.categorias||{})[w.k]||w.k).toLowerCase()+' ('+w.v+'% no pós-teste). '+esc(R[w.k]||'')]);});
- [{k:'Empresa toda',...faTot}].concat(faSet).forEach(s=>{if(s.pre!=null&&s.pos!=null&&s.pos>s.pre)recs.push(['<b>'+esc(s.k)+'</b>: falsos alarmes subiram de '+s.pre+'% para '+s.pos+'%. '+esc(R.falsoAlarme||'')]);});
- const tia=tipos.find(t=>t.k==='ia');if(tia&&tia.pos!=null&&tia.pos<metas.ia)recs.push(['<b>Empresa toda</b>: golpes com IA com '+tia.pos+'% de acerto (meta '+metas.ia+'%). '+esc(R.ia||'')]);
+ const RB=new Map(),R=cat.recomendacoes||{},add=(k,t)=>{if(!RB.has(k))RB.set(k,[]);RB.get(k).push(t);};
+ RB.set('Empresa toda',[]);GR.forEach(([k])=>RB.set(k,[]));
+ const tia=tipos.find(t=>t.k==='ia');if(tia&&tia.pos!=null&&tia.pos<metas.ia)add('Empresa toda','Golpes com IA com '+tia.pos+'% de acerto (meta '+metas.ia+'%): '+esc(R.ia||''));
+ if(faTot.pre!=null&&faTot.pos!=null&&faTot.pos>faTot.pre)add('Empresa toda','Falsos alarmes subiram de '+faTot.pre+'% para '+faTot.pos+'%: '+esc(R.falsoAlarme||''));
+ adesSet.forEach(s=>{const v=p(s.c,s.n);if(v<meta)add(s.k,'Adesão de '+v+'% (meta '+meta+'%): reforçar a comunicação com o setor e combinar um horário para concluir o treinamento.');});
+ evoSet.forEach(s=>{if(s.insuf)return;const w=s.tipos.find(t=>t.v<metas.acerto);if(w)add(s.k,'Menor acerto em '+esc((cat.categorias||{})[w.k]||w.k).toLowerCase()+' ('+w.v+'% no pós-teste): '+esc(R[w.k]||''));});
+ faSet.forEach(s=>{if(!s.insuf&&s.pre!=null&&s.pos!=null&&s.pos>s.pre)add(s.k,'Falsos alarmes subiram de '+s.pre+'% para '+s.pos+'%: '+esc(R.falsoAlarme||''));});
+ const recs=[...RB.entries()].filter(([,l])=>l.length).map(([k,l])=>['<b>'+esc(k)+'</b><ul class="rsub">'+l.map(t=>'<li>'+t+'</li>').join('')+'</ul>']);
  if(!recs.length)recs.push(['Resultados dentro das metas. Recomenda-se repetir o treinamento em cerca de 3 meses, com conteúdo novo, para manter o nível.']);
  const datas=ativos.map(x=>PROGS[x.chave]&&PROGS[x.chave].criadoEm).filter(Boolean),fims=conc.map(x=>x.n.concluidoEm).filter(Boolean);
- return{faTot,faSet,pc:cat.proximoCiclo||null,ativos,N,C,meta,metas,evoTot:evo(conc),tipos,erros,adesSet,ocAd:sAd.ocultos,evoSet,ocEv:sEv.ocultos,vuln,recs,inativos:FUNS.length-N,
+ return{faTot,faSet,pc:cat.proximoCiclo||null,ativos,N,C,meta,metas,evoTot:evo(conc),tipos,erros,adesSet,ocAd:sAd.ocultos,evoSet,vuln,recs,inativos:FUNS.length-N,
   periodo:[datas.length?Math.min(...datas):EMPD.criadoEm,fims.length?Math.max(...fims):Date.now()],nivel:cat.titulo||'Nível 1'};}
 
 /* ---------- gráficos (SVG) ---------- */
-const svg=(w,h,b,lab)=>'<svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="'+esc(lab)+'" style="font-family:inherit">'+b+'</svg>';
+const svg=(w,h,b,lab)=>'<svg viewBox="0 0 '+w+' '+h+'" width="100%" role="img" aria-label="'+esc(lab)+'" style="font-family:inherit;display:block">'+b+'</svg>';
+/* Gráficos em blocos de até 3 linhas: cada bloco é um SVG próprio (com a linha da meta), para o PDF poder
+   quebrar a página entre blocos em vez de empurrar o gráfico inteiro e deixar meia folha vazia. */
+const LOTE=3,lotes=rows=>{const o=[];for(let i=0;i<rows.length;i+=LOTE)o.push(rows.slice(i,i+LOTE));return o;};
 function barrasMeta(rows,meta,lab){/* rows:[{l,v,sub}] barra única com linha da meta */
- const W=720,L=200,R=60,PW=W-L-R,rh=34,H=rows.length*rh+24,X=v=>L+PW*v/100;let s='';
- rows.forEach((r,i)=>{const y=i*rh+18,c=r.v>=meta?COR.ok:r.v>=meta*.85?COR.warn:COR.bad;
+ return '<div class="rgraf">'+lotes(rows).map((rs,b)=>{const W=720,L=200,R=60,PW=W-L-R,rh=34,top=b?4:18,H=rs.length*rh+top+6,X=v=>L+PW*v/100;let s='';
+ rs.forEach((r,i)=>{const y=i*rh+top,c=r.v>=meta?COR.ok:r.v>=meta*.85?COR.warn:COR.bad;
   s+='<text x="'+(L-10)+'" y="'+(y+12)+'" font-size="13" font-weight="600" fill="#12202e" text-anchor="end">'+esc(r.l)+'</text><text x="'+(L-10)+'" y="'+(y+25)+'" font-size="10.5" fill="#566679" text-anchor="end">'+esc(r.sub||'')+'</text>'+
    '<rect x="'+L+'" y="'+(y+2)+'" width="'+PW+'" height="16" rx="4" fill="#eef1f5"/><rect x="'+L+'" y="'+(y+2)+'" width="'+Math.max(2,PW*r.v/100).toFixed(1)+'" height="16" rx="4" fill="'+c+'"/>'+
    '<text x="'+(L+PW+8)+'" y="'+(y+15)+'" font-size="13" font-weight="800" fill="#12202e">'+r.v+'%</text>';});
- s+='<rect x="'+(X(meta)-1.25)+'" y="12" width="2.5" height="'+(H-14)+'" fill="'+COR.meta+'"/><text x="'+X(meta)+'" y="10" font-size="11" font-weight="800" text-anchor="middle" fill="#12202e">Meta '+meta+'%</text>';
- return svg(W,H,s,lab);}
+ s+='<rect x="'+(X(meta)-1.25)+'" y="'+(b?0:12)+'" width="2.5" height="'+(H-(b?0:12))+'" fill="'+COR.meta+'"/>'+(b?'':'<text x="'+X(meta)+'" y="10" font-size="11" font-weight="800" text-anchor="middle" fill="#12202e">Meta '+meta+'%</text>');
+ return svg(W,H,s,lab+(b?' (continuação)':''));}).join('')+'</div>';}
 function barrasPrePos(rows,meta,lab){/* rows:[{l,pre,pos,sub}] */
- const W=720,L=200,R=60,PW=W-L-R,rh=46,H=rows.length*rh+24,X=v=>L+PW*v/100;let s='';
- rows.forEach((r,i)=>{const y=i*rh+18;
+ return '<div class="rgraf">'+lotes(rows).map((rs,b)=>{const W=720,L=200,R=60,PW=W-L-R,rh=46,top=b?4:18,H=rs.length*rh+top+2,X=v=>L+PW*v/100;let s='';
+ rs.forEach((r,i)=>{const y=i*rh+top;
   s+='<text x="'+(L-10)+'" y="'+(y+14)+'" font-size="13" font-weight="600" fill="#12202e" text-anchor="end">'+esc(r.l)+'</text><text x="'+(L-10)+'" y="'+(y+28)+'" font-size="10.5" fill="#566679" text-anchor="end">'+esc(r.sub||'')+'</text>';
+  if(r.pre==null&&r.pos==null&&r.sub&&/insuficientes/.test(r.sub))s+='<text x="'+L+'" y="'+(y+20)+'" font-size="12" fill="#566679" font-style="italic">Dados insuficientes: resultado aparece quando ao menos '+MINGRP+' pessoas concluírem.</text>';
   [['pre',0],['pos',18]].forEach(([k,dy])=>{const v=r[k];if(v==null)return;let lx=L+PW*v/100+6;const xm=meta==null?-99:X(meta);if(lx<xm+6&&lx+38>xm-3)lx=xm+6;s+='<rect x="'+L+'" y="'+(y+dy)+'" width="'+Math.max(2,PW*v/100).toFixed(1)+'" height="14" rx="3" fill="'+COR[k]+'"/><text x="'+lx.toFixed(1)+'" y="'+(y+dy+11)+'" font-size="11.5" font-weight="800" fill="#12202e">'+v+'%</text>';});});
- if(meta!=null)s+='<rect x="'+(X(meta)-1.25)+'" y="12" width="2.5" height="'+(H-14)+'" fill="'+COR.meta+'"/><text x="'+X(meta)+'" y="10" font-size="11" font-weight="800" text-anchor="middle" fill="#12202e">Meta '+meta+'%</text>';
- return svg(W,H,s,lab);}
+ if(meta!=null)s+='<rect x="'+(X(meta)-1.25)+'" y="'+(b?0:12)+'" width="2.5" height="'+(H-(b?0:12))+'" fill="'+COR.meta+'"/>'+(b?'':'<text x="'+X(meta)+'" y="10" font-size="11" font-weight="800" text-anchor="middle" fill="#12202e">Meta '+meta+'%</text>');
+ return svg(W,H,s,lab+(b?' (continuação)':''));}).join('')+'</div>';}
 const legenda='<p class="rleg"><span><i style="background:'+COR.pre+'"></i>Pré-teste (antes da aula)</span><span><i style="background:'+COR.pos+'"></i>Pós-teste (depois da aula)</span><span><i style="background:'+COR.meta+';width:3px"></i>Meta</span></p>';
 
 /* ---------- relatório ---------- */
@@ -433,25 +450,26 @@ async function abreRelatorio(){
   const res3=['<b>Adesão:</b> '+D.C+' de '+D.N+' funcionários ativos concluíram ('+ad+'%), '+(ad>=D.meta?'atingindo a':'abaixo da')+' meta de '+D.meta+'%.',
    '<b>Evolução:</b> '+(dl==null?'ainda sem pessoas que concluíram pré e pós-teste.':'o acerto médio passou de '+D.evoTot.pre+'% no pré-teste para '+D.evoTot.pos+'% no pós-teste ('+sg(dl)+' p.p.).'),
    '<b>Setor mais vulnerável:</b> '+(D.vuln?esc(D.vuln.k)+', com '+D.vuln.pos+'% de acerto no pós-teste.':'não identificado: nenhum setor tem ao menos '+MINGRP+' pessoas que concluíram.')];
+  const insT=s=>'dados insuficientes ('+s.n+' de '+MINGRP+' concluíram)';
   let h='<div class="rcapa"><div class="rbrand">Clique Certo · Treinamento de conscientização em segurança digital</div><h1>Relatório executivo</h1><h2>'+esc(EMPD.nome)+'</h2>'+
    '<div class="rmeta"><div><span>Nível</span><b>'+esc(D.nivel)+'</b></div><div><span>Período</span><b>'+dt(D.periodo[0])+' a '+dt(D.periodo[1])+'</b></div><div><span>Emissão</span><b>'+hoje+'</b></div><div><span>Funcionários ativos</span><b>'+D.N+'</b></div></div><p class="rprep">Preparado por <b>Ativa Security</b></p></div>'+
    '<section class="rsec"><h2>1. Resumo executivo</h2><ul class="r3">'+res3.map(x=>'<li>'+x+'</li>').join('')+'</ul><p class="rcert"><b>Certificado:</b> '+esc(textoCert(regraCert(D.N,D.C,D.evoTot.pos,D.meta,D.metas.minimo||60)))+'</p></section>'+
-   '<section class="rsec"><h2>2. Adesão</h2><p class="rhow">Percentual de funcionários ativos que concluíram o nível (pré-teste, aula e pós-teste). A linha preta é a meta. Setores com menos de '+MINGRP+' pessoas aparecem juntos em "Outros setores".</p>'+
+   '<section class="rsec"><h2>2. Adesão</h2><p class="rhow">Percentual de funcionários ativos que concluíram o nível (pré-teste, aula e pós-teste). A linha preta é a meta. Setores com menos de '+MINGRP+' funcionários ativos aparecem juntos em "Outros setores", <b>da mesma forma em todas as seções</b>.</p>'+
    barrasMeta([{l:'Empresa toda',v:ad,sub:D.C+' de '+D.N}].concat(D.adesSet.map(s=>({l:s.k,v:pct(s.c,s.n),sub:s.c+' de '+s.n}))),D.meta,'Adesão por setor')+
    (D.ocAd?'<p class="rnote">'+D.ocAd+' pessoa(s) de setores pequenos aparecem só no total da empresa, para preservar a privacidade.</p>':'')+(D.inativos?'<p class="rnote">'+D.inativos+' cadastro(s) desativado(s) não entram no cálculo.</p>':'')+'</section>';
   if(D.evoTot.n){
    h+='<section class="rsec"><h2>3. Evolução pré → pós</h2><p class="rhow">Acerto médio de quem concluiu, antes e depois da aula. p.p. = pontos percentuais (diferença entre dois percentuais).</p>'+legenda+
-    barrasPrePos([{l:'Empresa toda',pre:D.evoTot.pre,pos:D.evoTot.pos,sub:D.evoTot.n+' pessoas · '+sg(dl)+' p.p.'}].concat(D.evoSet.map(s=>({l:s.k,pre:s.pre,pos:s.pos,sub:s.n+' pessoas · '+sg(s.pos-s.pre)+' p.p.'}))),D.metas.acerto,'Evolução por setor')+(D.ocEv?'<p class="rnote">'+D.ocEv+' pessoa(s) de setores pequenos aparecem só no total.</p>':'')+'</section>'+
+    barrasPrePos([{l:'Empresa toda',pre:D.evoTot.pre,pos:D.evoTot.pos,sub:D.evoTot.n+' pessoas · '+sg(dl)+' p.p.'}].concat(D.evoSet.map(s=>s.insuf?{l:s.k,pre:null,pos:null,sub:insT(s)}:{l:s.k,pre:s.pre,pos:s.pos,sub:s.n+' pessoas · '+sg(s.pos-s.pre)+' p.p.'})),D.metas.acerto,'Evolução por setor')+(D.evoSet.some(s=>s.insuf)?'<p class="rnote">Setor com menos de '+MINGRP+' pessoas que concluíram aparece como "dados insuficientes" até atingir o mínimo.</p>':'')+'</section>'+
     '<section class="rsec"><h2>4. Resultado por tipo de ataque</h2><p class="rhow">Acerto por tipo de mensagem, do menor para o maior no pós-teste. "Golpes com IA" reúne os ataques feitos com inteligência artificial (meta '+D.metas.ia+'%).</p>'+legenda+
     barrasPrePos(D.tipos.map(t=>({l:t.l,pre:t.pre,pos:t.pos,sub:t.n+' respostas no pós'})),D.metas.acerto,'Acerto por tipo de ataque')+
     '<h3>Falsos alarmes</h3><p class="rhow">Percentual de mensagens <b>verdadeiras</b> marcadas como golpe. Quanto menor, melhor. Se subir do pré para o pós, a equipe pode estar desconfiando demais de mensagens legítimas.</p>'+legenda.replace(/<span><i style="background:#12202e[^]*?<\/span>/,'')+
-    barrasPrePos([{l:'Empresa toda',pre:D.faTot.pre,pos:D.faTot.pos,sub:D.faTot.n+' pessoas'}].concat(D.faSet.map(s=>({l:s.k,pre:s.pre,pos:s.pos,sub:s.n+' pessoas'}))),null,'Falsos alarmes por setor')+'</section>';
+    barrasPrePos([{l:'Empresa toda',pre:D.faTot.pre,pos:D.faTot.pos,sub:D.faTot.n+' pessoas'}].concat(D.faSet.map(s=>s.insuf?{l:s.k,pre:null,pos:null,sub:insT(s)}:{l:s.k,pre:s.pre,pos:s.pos,sub:s.n+' pessoas'})),null,'Falsos alarmes por setor')+'</section>';
   } else h+='<section class="rsec"><h2>3. Evolução pré → pós</h2><p>Ainda não há funcionários que concluíram pré e pós-teste.</p></section>';
   h+='<section class="rsec"><h2>5. Mensagens que mais confundiram</h2>'+(D.erros.length?'<p class="rhow">Percentual de respostas erradas (somente mensagens com ao menos '+MINGRP+' respostas).</p><table><thead><tr><th>Mensagem</th><th>Tipo</th><th>Respostas</th><th>Erraram</th></tr></thead><tbody>'+D.erros.map(e=>'<tr><td>'+esc(e.l)+'</td><td>'+esc(e.tag)+'</td><td>'+e.n+'</td><td><b>'+e.v+'%</b></td></tr>').join('')+'</tbody></table>':'<p>Respostas insuficientes (mínimo de '+MINGRP+' por mensagem).</p>')+'</section>'+
-   '<section class="rsec"><h2>6. Recomendações</h2><ul>'+D.recs.map(r=>'<li>'+r[0]+'</li>').join('')+'</ul></section>'+
+   '<section class="rsec"><h2>6. Recomendações</h2><ul class="rrec">'+D.recs.map(r=>'<li>'+r[0]+'</li>').join('')+'</ul></section>'+
    '<section class="rsec"><h2>7. Situação por funcionário</h2><p class="rhow">Somente conclusão. A pontuação individual e as respostas não são compartilhadas com a empresa.</p><table><thead><tr><th>Nome</th><th>Setor</th><th>Situação</th><th>Conclusão</th></tr></thead><tbody>'+
    D.ativos.slice().sort((a,b)=>NAT(a.setor,b.setor)||NAT(a.nome,b.nome)).map(x=>'<tr><td>'+esc(x.nome)+'</td><td>'+esc(x.setor)+'</td><td>'+x.st+'</td><td>'+(x.conc?dt(x.n.concluidoEm):'–')+'</td></tr>').join('')+'</tbody></table></section>'+
-   secCiclo(D)+'<section class="rsec rmet"><h2>Metodologia</h2><p>Cada funcionário faz um <b>pré-teste</b> com 14 mensagens simuladas (e-mail, chat e pop-ups), assiste à aula e faz um <b>pós-teste</b> com outras 14 mensagens de dificuldade equivalente. Os dois conjuntos são alternados entre as pessoas. O acerto de cada teste é a proporção de mensagens avaliadas corretamente (golpe reconhecido ou mensagem verdadeira aceita); a evolução é a diferença, em pontos percentuais, entre o pós e o pré-teste. Falso alarme é uma mensagem verdadeira marcada como golpe. Todos os percentuais consideram apenas funcionários ativos. Resultados por setor só aparecem com ao menos '+MINGRP+' pessoas; grupos menores são somados em "Outros setores" ou só no total. <b>Dados individuais de desempenho (pontuação e respostas) não são compartilhados com a empresa</b>; este relatório mostra, por pessoa, apenas a situação de conclusão. Metas de referência: conclusão '+D.meta+'%, acerto '+D.metas.acerto+'%, golpes com IA '+D.metas.ia+'%.</p></section>'+
+   secCiclo(D)+'<section class="rsec rmet"><h2>Metodologia</h2><p>Cada funcionário faz um <b>pré-teste</b> com 14 mensagens simuladas (e-mail, chat e pop-ups), assiste à aula e faz um <b>pós-teste</b> com outras 14 mensagens de dificuldade equivalente. Os dois conjuntos são alternados entre as pessoas. O acerto de cada teste é a proporção de mensagens avaliadas corretamente (golpe reconhecido ou mensagem verdadeira aceita); a evolução é a diferença, em pontos percentuais, entre o pós e o pré-teste. Falso alarme é uma mensagem verdadeira marcada como golpe. Todos os percentuais consideram apenas funcionários ativos. Os grupos por setor são definidos uma única vez, pelo número de funcionários ativos: setores com ao menos '+MINGRP+' ativos aparecem com o próprio nome; os menores são somados em "Outros setores" (ou entram só no total, se a soma ainda for menor que '+MINGRP+'), sempre da mesma forma em todas as seções. Resultados de desempenho de um grupo só aparecem com ao menos '+MINGRP+' pessoas que concluíram; antes disso, "dados insuficientes". <b>Dados individuais de desempenho (pontuação e respostas) não são compartilhados com a empresa</b>; este relatório mostra, por pessoa, apenas a situação de conclusão. Metas de referência: conclusão '+D.meta+'%, acerto '+D.metas.acerto+'%, golpes com IA '+D.metas.ia+'%.</p></section>'+
    '<div class="rft"><span>Clique Certo · Ativa Security</span><span>'+esc(EMPD.nome)+' · emitido em '+hoje+'</span></div>';
   box.innerHTML='<div class="rbar"><button id="rPdf">Baixar PDF</button><button class="sec" id="rCsv">CSV agregado</button><button class="sec" id="rFecha">Fechar</button><small>Na janela de impressão, escolha "Salvar como PDF".</small></div><div class="rpage">'+h+'</div>';
   RELD=D;box.scrollTop=0;
@@ -465,9 +483,9 @@ function secCiclo(D){const P=D.pc;if(!P)return '';const ni=D.ativos.filter(x=>x.
  return '<section class="rsec"><h2>8. Próximo ciclo recomendado</h2>'+(P.intro?'<p>'+f(P.intro)+'</p>':'')+'<ul>'+it.map(t=>'<li>'+f(t)+'</li>').join('')+'</ul></section>';}
 function csvAgregado(){const D=RELD,r=[['secao','recorte','pessoas','indicador','valor']];
  r.push(['adesao','Empresa toda',D.N,'concluiram_%',pct(D.C,D.N)]);D.adesSet.forEach(s=>r.push(['adesao',s.k,s.n,'concluiram_%',pct(s.c,s.n)]));
- if(D.evoTot.n){r.push(['evolucao','Empresa toda',D.evoTot.n,'pre_%',D.evoTot.pre],['evolucao','Empresa toda',D.evoTot.n,'pos_%',D.evoTot.pos]);D.evoSet.forEach(s=>{r.push(['evolucao',s.k,s.n,'pre_%',s.pre],['evolucao',s.k,s.n,'pos_%',s.pos]);});
+ if(D.evoTot.n){r.push(['evolucao','Empresa toda',D.evoTot.n,'pre_%',D.evoTot.pre],['evolucao','Empresa toda',D.evoTot.n,'pos_%',D.evoTot.pos]);D.evoSet.forEach(s=>{if(s.insuf)r.push(['evolucao',s.k,s.n,'situacao','dados insuficientes']);else r.push(['evolucao',s.k,s.n,'pre_%',s.pre],['evolucao',s.k,s.n,'pos_%',s.pos]);});
   D.tipos.forEach(t=>{r.push(['tipo_de_ataque',t.l,'','pre_%',t.pre??''],['tipo_de_ataque',t.l,'','pos_%',t.pos??'']);});}
- if(D.evoTot.n){r.push(['falsos_alarmes','Empresa toda',D.faTot.n,'pre_%',D.faTot.pre??''],['falsos_alarmes','Empresa toda',D.faTot.n,'pos_%',D.faTot.pos??'']);D.faSet.forEach(s=>r.push(['falsos_alarmes',s.k,s.n,'pre_%',s.pre??''],['falsos_alarmes',s.k,s.n,'pos_%',s.pos??'']));}
+ if(D.evoTot.n){r.push(['falsos_alarmes','Empresa toda',D.faTot.n,'pre_%',D.faTot.pre??''],['falsos_alarmes','Empresa toda',D.faTot.n,'pos_%',D.faTot.pos??'']);D.faSet.forEach(s=>{if(s.insuf)r.push(['falsos_alarmes',s.k,s.n,'situacao','dados insuficientes']);else r.push(['falsos_alarmes',s.k,s.n,'pre_%',s.pre??''],['falsos_alarmes',s.k,s.n,'pos_%',s.pos??'']);});}
  D.erros.forEach(e=>r.push(['mensagens_com_mais_erros',e.l,e.n,'erro_%',e.v]));
  baixar('relatorio-agregado-'+(EMPD.nome||'empresa').replace(/[^\w]+/g,'-')+'.csv',csv(r),'text/csv;charset=utf-8');}
 document.addEventListener('click',e=>{if(e.target.id==='rFecha')$('#rep').hidden=true;if(e.target.id==='rPdf')window.print();if(e.target.id==='rCsv')csvAgregado();});
@@ -475,6 +493,10 @@ document.addEventListener('click',e=>{if(e.target.id==='rFecha')$('#rep').hidden
 /* ---------- certificado da empresa ---------- */
 const codVer=()=>'CC-'+gerarCod().slice(0,4)+'-'+gerarCod().slice(0,4);
 let CATEMP=null;
+function instrPlanilha(){const mat=EMPD&&EMPD.rotuloCodigo!=='codigo',dom=(EMPD&&EMPD.dominio)||'empresa.com.br';
+ $('#iInstr').innerHTML=mat?'Esta empresa <b>usa matrícula</b>. Colunas obrigatórias: <b>nome</b>, <b>e-mail</b>, <b>setor</b> e <b>matrícula</b>. Cada pessoa entra com o e-mail e a própria matrícula. Planilha sem a coluna de matrícula é recusada. Separador: vírgula, ponto e vírgula ou tabulação. CPF nunca é aceito.'
+  :'Esta empresa <b>não usa matrícula</b>. Colunas: <b>nome</b>, <b>e-mail</b> e <b>setor</b>. O portal gera um código de acesso de 6 caracteres para cada pessoa; depois use "CSV para o RH" para distribuir. Se a planilha tiver coluna de matrícula, ela é ignorada. Separador: vírgula, ponto e vírgula ou tabulação.';
+ $('#iTxt').placeholder=mat?'nome;email;setor;matricula\nMaria Silva;maria.silva@'+dom+';Financeiro;10234':'nome;email;setor\nMaria Silva;maria.silva@'+dom+';Financeiro';}
 /* regra do certificado: conclusão ≥ meta E acerto médio no pós ≥ metas.minimo → "conclusao"; só a conclusão → "participacao" */
 function regraCert(N,C,acPos,meta,minimo){const v=pct(C,N),ok=N>0&&v>=meta,selo=ok&&acPos!=null&&acPos>=minimo;return{N,C,v,meta,minimo,acPos,ok,tipo:!ok?null:selo?'conclusao':'participacao'};}
 function textoCert(s){if(!s.ok)return 'Nenhum certificado liberado: falta conclusão de '+s.meta+'% dos funcionários ativos (hoje '+s.v+'%, '+s.C+' de '+s.N+'). Para o selo "Conclusão" também é preciso acerto médio de '+s.minimo+'% no pós-teste.';
@@ -515,16 +537,17 @@ async function desenhaCert(d,cod){
 
 
 /* ---------- CSV para o RH: modelo de e-mail (sem envio pelo sistema) ---------- */
-function modeloEmail(){const rot=EMPD.rotuloCodigo==='codigo'?'código de acesso':'matrícula',emp=EMPD.nome||'a empresa';
- return 'Assunto: Treinamento de segurança digital – '+emp+'\n\nOlá, {{nome}}.\n\nA '+emp+' está realizando o treinamento Clique Certo, de conscientização em segurança digital, conduzido pela Ativa Security. Leva cerca de 20 minutos e pode ser feito no celular ou no computador.\n\nPara acessar:\n1. Abra o link: {{link}}\n2. Informe seu e-mail corporativo e sua '+rot+': {{codigo}}\n\nO acesso é pessoal: não compartilhe sua '+rot+'. Se tiver dúvida sobre esta mensagem, confirme com o RH antes de abrir o link.\n\nAtenciosamente,\nRH – '+emp;}
-$('#bModEmail').onclick=async()=>{const t=modeloEmail(),box=$('#pEmail');
- box.innerHTML='<b>Modelo de e-mail para o RH</b> <button class="sec sm" id="bFechaMod">Fechar</button><pre id="modTxt"></pre>'+
- '<p class="msg">Os campos <b>{{nome}}</b>, <b>{{codigo}}</b> e <b>{{link}}</b> correspondem às colunas do <b>CSV para o RH</b>. O sistema não envia e-mails: use a mala direta do seu provedor de e-mail.</p>'+
+function modeloEmail(prazo){const mat=EMPD.rotuloCodigo!=='codigo',emp=EMPD.nome||'a empresa',seu=mat?'sua matrícula':'seu código de acesso',dom=CFG.dominioOficial||'';
+ return 'Assunto: Treinamento de segurança digital – '+emp+'\n\nOlá, {{nome}}.\n\nEstamos realizando o treinamento Clique Certo, de conscientização em segurança digital, conduzido pela Ativa Security. Leva cerca de 20 minutos e pode ser feito no celular ou no computador.'+(prazo?' Conclua até '+prazo+'.':'')+'\n\nPara acessar:\n1. Abra o link: {{link}}\n2. Informe seu e-mail corporativo e '+seu+': {{codigo}}\n\n'+(dom?'O endereço oficial do treinamento é '+dom+'. Desconfie de links para outros endereços.\n\n':'')+'O acesso é pessoal: não compartilhe '+seu+'. Se tiver dúvida sobre esta mensagem, confirme com o RH antes de abrir o link.\n\nAtenciosamente,\nRH – '+emp;}
+$('#bModEmail').onclick=async()=>{const t=modeloEmail(''),box=$('#pEmail');
+ box.innerHTML='<b>Modelo de e-mail para o RH</b> <button class="sec sm" id="bFechaMod">Fechar</button><div class="row" style="margin:8px 0"><label style="max-width:240px">Prazo para concluir (opcional)<input type="date" id="modPrazo"></label><button class="sec sm" id="bCopiaMod">Copiar modelo</button></div><pre id="modTxt"></pre>'+
+ '<p class="msg">Os campos <b>{{nome}}</b>, <b>{{codigo}}</b> e <b>{{link}}</b> correspondem às colunas do <b>CSV para o RH</b>. O prazo é opcional: preencha a data acima e copie de novo. '+(CFG.dominioOficial?'O endereço oficial ('+esc(CFG.dominioOficial)+') já entra no texto.':'Quando houver domínio próprio, o texto passa a citar o endereço oficial automaticamente.')+' O sistema não envia e-mails: use a mala direta do seu provedor de e-mail.</p>'+
  '<p><b>Outlook (Microsoft 365)</b></p><ol><li>Abra o Word e vá em <b>Correspondências → Iniciar Mala Direta → Mensagens de Email</b>.</li><li><b>Selecionar Destinatários → Usar uma Lista Existente</b> e escolha o CSV para o RH.</li><li>Cole o modelo e troque cada {{campo}} por <b>Inserir Campo de Mesclagem</b> (nome, codigo, link).</li><li><b>Concluir e Mesclar → Enviar Mensagens de Email</b>, com a coluna <b>email</b> no campo Para.</li></ol>'+
  '<p><b>Gmail / Google Workspace</b></p><ol><li>Importe o CSV no Google Planilhas.</li><li>Use a mala direta do próprio Gmail (disponível em algumas edições do Workspace) ou uma extensão de mala direta.</li><li>Cole o modelo e associe {{nome}}, {{codigo}} e {{link}} às colunas da planilha.</li></ol>'+
  '<p class="msg"><b>Limites diários de envio:</b> variam conforme o plano (por exemplo, cerca de 500 por dia no Gmail gratuito, 2.000 no Google Workspace e 10.000 destinatários no Microsoft 365). Para listas grandes, envie em lotes e faça antes um teste com o seu próprio e-mail.</p>';
  $('#modTxt').textContent=t;box.hidden=false;try{await navigator.clipboard.writeText(t);$('#bModEmail').textContent='Modelo copiado';setTimeout(()=>$('#bModEmail').textContent='Copiar modelo de e-mail',1800);}catch(e){}};
-document.addEventListener('click',e=>{if(e.target.id==='bFechaMod')$('#pEmail').hidden=true;});
+document.addEventListener('click',e=>{if(e.target.id==='bFechaMod')$('#pEmail').hidden=true;if(e.target.id==='bCopiaMod'){try{navigator.clipboard.writeText($('#modTxt').textContent);e.target.textContent='Copiado';setTimeout(()=>e.target.textContent='Copiar modelo',1500);}catch(er){}}});
+document.addEventListener('change',e=>{if(e.target.id==='modPrazo'){const v=e.target.value,d=v?v.split('-').reverse().join('/'):'';$('#modTxt').textContent=modeloEmail(d);}});
 
 /* ---------- Empresa de demonstração (somente staging) ---------- */
 const DEMO_DOM='metalurgicavaleazul.com.br';
@@ -570,6 +593,20 @@ async function excluiDemo(){if(!EMPD||!EMPD.demo)return;const b=$('#bDelDemo');b
   for(let i=0;i<ids.length;i+=400){const bt=F.writeBatch(db);ids.slice(i,i+400).forEach(r=>bt.delete(r));await bt.commit();}
   await F.deleteDoc(F.doc(db,'empresas',EID));EID='';EMPD=null;ver('empresas');say('#mDemo','Demonstração excluída.','okt');listaEmpresas();}
  catch(e){$('#mCert').textContent='Erro ao excluir: '+ecode(e);b.disabled=false;}}
+$('#bDelEmp').onclick=()=>{$('#pDelEmp').hidden=false;$('#iDelNome').value='';$('#bDelOk').disabled=true;say('#mDel','');};
+$('#bDelCanc').onclick=()=>{$('#pDelEmp').hidden=true;};
+$('#bDelBk').onclick=()=>{bkEmp();$('#bDelBk').textContent='Backup baixado (baixar de novo)';};
+$('#iDelNome').oninput=()=>{$('#bDelOk').disabled=$('#iDelNome').value.trim()!==String(EMPD&&EMPD.nome||'').trim();};
+$('#bDelOk').onclick=()=>armar($('#bDelOk'),'Confirmar: apagar tudo desta empresa',excluiEmpresa);
+async function excluiEmpresa(){const b=$('#bDelOk');b.disabled=true;say('#mDel','Excluindo...');
+ try{await F.updateDoc(F.doc(db,'empresas',EID),{status:'encerrada'});
+  const refs=[];
+  for(const sub of ['funcionarios','progresso','sessoes']){const q=await F.getDocs(F.collection(db,'empresas',EID,sub));
+   for(const d of q.docs){if(sub==='progresso'){(await F.getDocs(F.collection(d.ref,'aparelhos'))).forEach(a=>refs.push(a.ref));}refs.push(d.ref);}}
+  (await F.getDocs(F.query(F.collection(db,'certificados'),F.where('empresaId','==',EID)))).forEach(d=>refs.push(d.ref));
+  for(let i=0;i<refs.length;i+=400){const bt=F.writeBatch(db);refs.slice(i,i+400).forEach(r=>bt.delete(r));await bt.commit();}
+  await F.deleteDoc(F.doc(db,'empresas',EID));const nome=EMPD.nome;EID='';EMPD=null;ver('empresas');say('#mDemo','Empresa "'+nome+'" excluída: '+refs.length+' registro(s) apagado(s).','okt');listaEmpresas();}
+ catch(e){say('#mDel','Erro ao excluir: '+ecode(e)+'. Nada foi perdido sem aviso: tente de novo ou envie um print.','err');b.disabled=false;}}
 $('#bDelDemo').onclick=()=>armar($('#bDelDemo'),'Apagar tudo desta demonstração: confirmar',excluiDemo);
 </script>
 </body>
